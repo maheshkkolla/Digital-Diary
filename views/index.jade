@@ -1,5 +1,9 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+ script(src="/javascripts/some.js")	.
+ script(src="/javascripts/tinymce/js/tinymce/tinymce.min.js")
+ p Welcome to Digital Diary
+ form(action='some')
+  textarea(name='content')
+  button(type="submit") Submit	

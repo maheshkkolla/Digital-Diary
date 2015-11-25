@@ -7,7 +7,7 @@ $(function() {
 	        "insertdatetime media table contextmenu paste",
 	        "textcolor"
 	    ],
-	    // resize: false,
+	    resize: false,
 	    height: 500,
 	    toolbar: "insertfile undo redo | fontselect styleselect fontsizeselect | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
 	});

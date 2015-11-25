@@ -1,0 +1,7 @@
+extends layout
+
+block content
+ a(href='/auth/dropbox') Login with Dropbox
+ if(error)
+  h3 Error: 
+  p #{error} 

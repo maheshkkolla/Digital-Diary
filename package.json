@@ -3,15 +3,28 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "createMigration": "./node_modules/db-migrate/bin/db-migrate create",
+    "migrateUp": "./node_modules/db-migrate/bin/db-migrate up",
+    "migrateDown": "./node_modules/db-migrate/bin/db-migrate down",
+    "start": "sh ./scripts/start.sh",
+    "startDev": "sh ./scripts/start_dev.sh"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
+    "db-migrate": "^0.9.23",
     "debug": "~2.2.0",
     "express": "~4.13.1",
+    "express-session": "^1.12.1",
     "jade": "~1.11.0",
+    "knex": "^0.9.0",
     "morgan": "~1.6.1",
+    "passport": "^0.3.2",
+    "passport-dropbox-oauth2": "^1.0.0",
+    "pg": "^4.4.3",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.8.1"
   }
 }

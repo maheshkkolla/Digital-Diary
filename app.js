@@ -81,13 +81,19 @@ app.get('/auth/dropbox', passport.authenticate('dropbox-oauth2'));
 
 app.get('/auth/dropbox-oauth2/callback', isAuthenticated, function(req, res, next) {
   req.session.user = req.user;
-  req.locals.user = req.user;
   res.redirect('/');
 });
 
 
 app.get('/login', function(req, res, next) {
   res.render('login' , {error: req.query.error});
+});
+
+app.get('/logout', function(req, res, next) {
+  req.logout();
+  req.session.destroy();
+  res.locals.user = '';
+  res.redirect('/login');
 });
 
 app.use(function (req, res, next) {

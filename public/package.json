@@ -1,0 +1,12 @@
+{
+  "name": "Diary",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "bower": "./node_modules/bower/bin/bower"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "bower": "^1.4.2"
+  }
+}

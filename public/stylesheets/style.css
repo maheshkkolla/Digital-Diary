@@ -1,6 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #bdcbf5 !important;
+  background-color: #e9eefc !important;
 }
 
 a {
@@ -12,8 +12,11 @@ a {
 	padding-right: 70px;
 }
 
-/* Both should be same */
-.navbar-default, .navbar-default .navbar-nav>.open>a {
+.navbar-default {
+	background-color: #18399a !important;
+}
+
+.navbar-default .navbar-nav>.open>a {
 	background-color: #18399a !important;
 }
 

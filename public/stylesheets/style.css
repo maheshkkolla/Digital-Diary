@@ -30,7 +30,8 @@ a {
 
 .sideTabWraper{
 	padding-right: 0px !important;
-	width: 60px !important; 
+	width: 45px !important;
+	padding-left: 0px !important;
 }
 
 .nav-pills>li>a {
@@ -50,7 +51,19 @@ a {
 	color: #ffffff !important;
 }
 
-
 .sideTabContent {
 	padding-left: 0px !important;
+}
+
+.calenderBar {
+	padding-right: 25px !important;x
+}
+
+.content {
+	border-left: 1px solid;
+	padding-left: 0px !important;
+}
+
+.mce-content-body {
+	background-color: red !important;
 }

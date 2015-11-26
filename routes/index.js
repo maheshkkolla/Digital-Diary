@@ -12,8 +12,9 @@ router.get('/journals', function(req, res, next) {
   	res.render('journals');
 });
 
-router.get('/journals', function(req, res, next) {
-
+router.get('/search', function(req, res, next) {
+	res.locals.user = {name:"Mahesh"}
+  	res.render('search');
 });
 
 module.exports = router;

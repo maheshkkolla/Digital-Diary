@@ -142,7 +142,11 @@ a {
     box-shadow: -3px -3px 10px 2px #FFF;
 }
 
-
+.searchInput {
+	font-size: 25px !important;
+    height: 60px !important;
+    margin: 50px;
+}
 
 
 

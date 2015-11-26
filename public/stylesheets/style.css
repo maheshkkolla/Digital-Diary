@@ -27,3 +27,30 @@ a {
 .navbar-header {
 	font-size: 20px;
 }
+
+.sideTabWraper{
+	padding-right: 0px !important;
+	width: 60px !important; 
+}
+
+.nav-pills>li>a {
+	border-radius: 5px 0px 0px 5px !important;
+	color: #337ab7 !important;
+}
+
+.nav-pills>li>a:hover {
+	background-color: #bdcbf5 !important;
+}
+
+.nav-pills>li.active>a:hover {
+	background-color: #337ab7 !important;
+}
+
+.nav-pills>li.active>a {
+	color: #ffffff !important;
+}
+
+
+.sideTabContent {
+	padding-left: 0px !important;
+}

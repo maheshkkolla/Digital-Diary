@@ -8,14 +8,25 @@ block content
  link(rel='stylesheet', href='/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')
  include _navbar
  div(class='myContainer')
-  p Welcome to Digital Diary
-  a(href='/logout') Logout
   div(class="row")
    div(class="col-md-2")  
     div(style="oveflow:hidden;")
      div(class="form-group")
       div(id='datetimepicker12')
    div(class="col-md-9") 
-    form(action='some')
-     textarea(name='content')
-     button(type="submit") Submit	
+    div(class='container-fluid')
+     div(class='col-md-1 sideTabWraper')
+      ul(class="nav nav-pills nav-stacked")
+       li(role="presentation" class="active")
+        a(href="#")
+         span(class="glyphicon glyphicon-pencil")
+       li(role="presentation")
+        a(href="#")
+         span(class="glyphicon glyphicon-list-alt")
+       li(role="presentation")
+        a(href="#")
+         span(class="glyphicon glyphicon-search") 
+     div(class='col-md-11 sideTabContent')
+      form(action='some')
+       textarea(name='content')
+       button(type="submit") Submit	

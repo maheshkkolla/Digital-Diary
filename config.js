@@ -6,6 +6,6 @@ module.exports = {
 	dropbox: {
 		clientID: process.env.clientID,
     	clientSecret: process.env.clientSecret,
-    	callbackURL: "http://localhost:3000/auth/dropbox-oauth2/callback"
+    	callbackURL: "http://localhost:3001/auth/dropbox-oauth2/callback"
 	}
 }

@@ -1,6 +1,6 @@
 $(function() {
-	$(".nav-pills li a").on('click', function() {
-		$(".nav-pills li").removeClass("active");
+	$(".nav-tabs li a").on('click', function() {
+		$(".nav-tabs li").removeClass("active");
 		$(this).parent().addClass("active");
 	});
 });

@@ -21,7 +21,7 @@ $(function() {
             sideBySide: true
         });
 
-        $("#datetimepicker12 .datepicker").removeClass("col-md-6");
-        $("#datetimepicker12 .timepicker").removeClass("col-md-6");
+        // $("#datetimepicker12 .datepicker").removeClass("col-md-6");
+        // $("#datetimepicker12 .timepicker").removeClass("col-md-6");
     });
 });

@@ -1,6 +1,7 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #e9eefc !important;
+  font-size: 16px !important;
 }
 
 a {
@@ -28,42 +29,44 @@ a {
 	font-size: 20px;
 }
 
-.sideTabWraper{
-	padding-right: 0px !important;
-	width: 45px !important;
-	padding-left: 0px !important;
+.nav-tabs {
+	border-bottom: 2px solid #337ab7 !important;
 }
 
-.nav-pills>li>a {
-	border-radius: 5px 0px 0px 5px !important;
+.nav-tabs>li>a {
+	border-radius: 5px 5px 0px 0px !important;
 	color: #337ab7 !important;
+	border: 2px solid #337ab7 !important;
+	border-bottom: 0px solid !important;
 }
 
-.nav-pills>li>a:hover {
+.nav-tabs>li>a:hover {
 	background-color: #bdcbf5 !important;
 }
 
-.nav-pills>li.active>a:hover {
-	background-color: #337ab7 !important;
+.nav-tabs>li.active>a:hover {
+	background-color: #5f92ec !important;
 }
 
-.nav-pills>li.active>a {
+.nav-tabs>li.active>a {
 	color: #ffffff !important;
+	background-color: #5f92ec !important;
+	border-bottom: 0px solid !important;
 }
 
-.sideTabContent {
-	padding-left: 0px !important;
+.bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover{
+	background-color: #4882ea !important;
 }
 
-.calenderBar {
-	padding-right: 25px !important;x
-}
-
-.content {
-	border-left: 1px solid;
-	padding-left: 0px !important;
+.btn-primary {
+	background-color: #4882ea !important;
 }
 
 .mce-content-body {
 	background-color: red !important;
+}
+
+.dropdown-menu>li>a:hover {
+	background-color: #4882ea !important;
+	color: #fff !important;
 }

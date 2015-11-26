@@ -12,16 +12,13 @@ a {
 	padding-right: 70px;
 }
 
-.navbar-default {
+/* Both should be same */
+.navbar-default, .navbar-default .navbar-nav>.open>a {
 	background-color: #18399a !important;
 }
 
 .nav>li>a {
     color: #ffffff !important;
-}
-
-.nav>li>a :hover {
-    color: darkgray;
 }
 
 .navbar-header {

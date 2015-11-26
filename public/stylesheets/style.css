@@ -70,3 +70,66 @@ a {
 	background-color: #4882ea !important;
 	color: #fff !important;
 }
+
+.dateTime {
+	width: 200px;
+	text-align: center;
+}
+
+.dateTime .panel-heading {
+	background-color: #f8c8a0;
+    color: #bf5f0d;
+    font-size: 30px;
+}
+.dateTime .panel-body{
+	font-style: bold;
+}
+
+.dateTime .panel-body>div {
+	font-size: 50px;
+}
+
+
+.dateTime .panel-body {
+	background-color: #fdf1e7;
+}
+
+.dateTime .panel-footer {
+	background-color: #fce4cf;
+    color: #ee7711;
+    font-size: 18px;
+    padding-bottom: 0px !important;
+    padding-right: 0px !important;
+    overflow: hidden;
+}
+
+.dateTime .panel-footer>b{
+	font-size: 20px;
+	margin-left: 20px;
+}
+
+.dateTime .paperTilt {
+	border-top: 18px solid;
+	border-left: 18px solid;
+	border-right: 18px solid #fce4cf;
+	border-bottom: 18px solid #fce4cf;
+    float: right;
+    height: 35px;
+    width: 35px;
+    border-top-left-radius: 5px;
+    box-shadow: -3px -3px 10px 2px #FFF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

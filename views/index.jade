@@ -10,18 +10,8 @@ block content
  div(class='myContainer borders')
   div(class="content")
    div(class='container')
-    div(style="overflow:hidden" class="col-md-6")
-     div(class="form-group")
-      div(id="datetimepicker12")
-    div(class="col-md-4 col-md-offset-2")
-     div(class='panel dateTime')
-      div(class="panel-heading") MMM YYYY
-      div(class="panel-body") 
-       b dddd 
-       div DD
-      div(class="panel-footer") 
-       b HH : MM
-       div(class="paperTilt")
+    include _dateTimePicker
+    include _showDateTimeCalendar
    div(class='myContainer')
     form(action='some') 
      textarea(name='content')

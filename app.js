@@ -96,13 +96,13 @@ app.get('/logout', function(req, res, next) {
   res.redirect('/login');
 });
 
-app.use(function (req, res, next) {
-  if (req.isAuthenticated()) {
-    res.locals.user = req.session.user;
-    next();
-  } 
-  else res.redirect('/login');
-});
+// app.use(function (req, res, next) {
+//   if (req.isAuthenticated()) {
+//     res.locals.user = req.session.user;
+//     next();
+//   } 
+//   else res.redirect('/login');
+// });
 
 app.use('/', routes);
 app.use('/users', users);

@@ -7,4 +7,13 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+router.get('/journals', function(req, res, next) {
+	res.locals.user = {name:"Mahesh"}
+  	res.render('journals');
+});
+
+router.get('/journals', function(req, res, next) {
+
+});
+
 module.exports = router;

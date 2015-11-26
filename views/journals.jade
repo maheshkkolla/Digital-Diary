@@ -2,7 +2,6 @@ extends layout
 
 block content
  script(src="/javascripts/tinymce/js/tinymce/tinymce.min.js")
- script(src="/javascripts/tinyMceConfig.js")
  include _navbar
  div(class='myContainer borders')
   div(class="content")
@@ -11,6 +10,3 @@ block content
     div(class='col-md-1')
     include _dateTimePicker
    div(class='myContainer')
-    form(action='some') 
-     textarea(name='content')
-     button(type="submit" class='btn btn-primary') Submit

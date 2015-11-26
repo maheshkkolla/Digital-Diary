@@ -8,15 +8,22 @@ a {
   color: #00B7FF;
 }
 
+.logo {
+	font-size: 28px;
+	font-family: fantasy;
+}
+
 .myContainer {
-	padding-left: 70px;
-	padding-right: 70px;
+	margin-left: 70px;
+	margin-right: 70px;
 }
 
 .content {
-	border-top: 1px solid;
 	margin-top: 40px;
-	padding-top: 40px;
+}
+
+.navbar {
+	margin-bottom: 0px !important;
 }
 
 .navbar-default {
@@ -35,8 +42,9 @@ a {
 	font-size: 20px;
 }
 
-.nav-tabs {
+/*.nav-tabs {
 	border-bottom: 2px solid #337ab7 !important;
+	padding-top: 10px;
 }
 
 .nav-tabs>li>a {
@@ -44,6 +52,7 @@ a {
 	color: #337ab7 !important;
 	border: 2px solid #337ab7 !important;
 	border-bottom: 0px solid !important;
+	margin-left: 5px;
 }
 
 .nav-tabs>li>a:hover {
@@ -59,7 +68,7 @@ a {
 	background-color: #5f92ec !important;
 	border-bottom: 0px solid !important;
 }
-
+*/
 .bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover{
 	background-color: #4882ea !important;
 }

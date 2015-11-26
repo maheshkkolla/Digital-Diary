@@ -2,6 +2,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #e9eefc !important;
   font-size: 16px !important;
+  color: #103b89 !important;
 }
 
 a {
@@ -11,6 +12,12 @@ a {
 .logo {
 	font-size: 28px;
 	font-family: fantasy;
+}
+
+.infoLabel {
+	font-size: 22px;
+	font-family: serif;
+	font-weight: bold;
 }
 
 .myContainer {
@@ -101,7 +108,7 @@ a {
 }
 
 .dateTime .panel-body>div {
-	font-size: 50px;
+	font-size: 60px;
 }
 
 

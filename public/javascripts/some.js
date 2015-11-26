@@ -16,6 +16,7 @@ $(function() {
 	$(function () {
         $('#datetimepicker12').datetimepicker({
             inline: true,
+            maxDate: new Date(),
             sideBySide: true
         });
 

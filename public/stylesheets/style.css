@@ -13,6 +13,12 @@ a {
 	padding-right: 70px;
 }
 
+.content {
+	border-top: 1px solid;
+	margin-top: 40px;
+	padding-top: 40px;
+}
+
 .navbar-default {
 	background-color: #18399a !important;
 }
@@ -72,14 +78,14 @@ a {
 }
 
 .dateTime {
-	width: 200px;
+	width: 250px;
 	text-align: center;
 }
 
 .dateTime .panel-heading {
 	background-color: #f8c8a0;
     color: #bf5f0d;
-    font-size: 30px;
+    font-size: 25px;
 }
 .dateTime .panel-body{
 	font-style: bold;

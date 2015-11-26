@@ -97,8 +97,10 @@ app.get('/logout', function(req, res, next) {
 });
 
 app.use(function (req, res, next) {
-  console.log(req.isAuthenticated())
-  if (req.isAuthenticated()) next();
+  if (req.isAuthenticated()) {
+    res.locals.user = req.session.user;
+    next();
+  } 
   else res.redirect('/login');
 });
 

@@ -6,14 +6,16 @@ block content
  script(src="/bower_components/moment/min/moment.min.js")
  script(src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")
  link(rel='stylesheet', href='/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')
- p Welcome to Digital Diary
- a(href='/logout') Logout
- div(class="row")
-  div(class="col-md-2")  
-   div(style="oveflow:hidden;")
-    div(class="form-group")
-     div(id='datetimepicker12')
-  div(class="col-md-9") 
-   form(action='some')
-    textarea(name='content')
-    button(type="submit") Submit	
+ include _navbar
+ div(class='myContainer')
+  p Welcome to Digital Diary
+  a(href='/logout') Logout
+  div(class="row")
+   div(class="col-md-2")  
+    div(style="oveflow:hidden;")
+     div(class="form-group")
+      div(id='datetimepicker12')
+   div(class="col-md-9") 
+    form(action='some')
+     textarea(name='content')
+     button(type="submit") Submit	

@@ -1,8 +1,29 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #bdcbf5 !important;
 }
 
 a {
   color: #00B7FF;
+}
+
+.myContainer {
+	padding-left: 70px;
+	padding-right: 70px;
+}
+
+.navbar-default {
+	background-color: #18399a !important;
+}
+
+.nav>li>a {
+    color: #ffffff !important;
+}
+
+.nav>li>a :hover {
+    color: darkgray;
+}
+
+.navbar-header {
+	font-size: 20px;
 }

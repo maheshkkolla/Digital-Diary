@@ -1,5 +1,5 @@
 npm install
-npm run migrateUp
+npm run migrateUp -e $1
 
 cd public
 npm install

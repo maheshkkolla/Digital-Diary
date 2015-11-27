@@ -11,6 +11,11 @@ block content
     div(class='col-md-1')
     include _dateTimePicker
    div(class='myContainer')
-    form(action='some') 
-     textarea(name='content')
-     button(type="submit" class='btn btn-primary') Submit
+    form(action='/journal' method='POST')
+     input(type='hidden' id='dateTime') 
+     div
+      textarea(name='journal')
+     div(class='container')
+      button(type="submit" class='btn btn-primary pull-right') Submit
+ include _footer     
+

@@ -23,5 +23,5 @@ var config = {
 	}
 }
 
-if(process.env == 'qa') module.exports = config.qa;
+if(process.env.ENV == 'QA') module.exports = config.qa;
 else module.exports = config.dev;

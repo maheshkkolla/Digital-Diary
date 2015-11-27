@@ -14,6 +14,20 @@ a {
 	font-family: fantasy;
 }
 
+.footer {
+	height: 50px;
+    border-top: 1px solid;
+    margin-top: 50px;
+    padding-top: 5px;
+    padding-left: 150px;
+    padding-right: 150px;
+    padding-bottom: 5px;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: #fff;
+}
+
 .infoLabel {
 	font-size: 22px;
 	font-family: serif;
@@ -49,33 +63,6 @@ a {
 	font-size: 20px;
 }
 
-/*.nav-tabs {
-	border-bottom: 2px solid #337ab7 !important;
-	padding-top: 10px;
-}
-
-.nav-tabs>li>a {
-	border-radius: 5px 5px 0px 0px !important;
-	color: #337ab7 !important;
-	border: 2px solid #337ab7 !important;
-	border-bottom: 0px solid !important;
-	margin-left: 5px;
-}
-
-.nav-tabs>li>a:hover {
-	background-color: #bdcbf5 !important;
-}
-
-.nav-tabs>li.active>a:hover {
-	background-color: #5f92ec !important;
-}
-
-.nav-tabs>li.active>a {
-	color: #ffffff !important;
-	background-color: #5f92ec !important;
-	border-bottom: 0px solid !important;
-}
-*/
 .bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover{
 	background-color: #4882ea !important;
 }
@@ -148,6 +135,9 @@ a {
     margin: 50px;
 }
 
+.mce-tinymce {
+	margin-bottom: 20px !important;
+}
 
 
 

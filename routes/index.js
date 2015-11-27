@@ -12,6 +12,11 @@ router.get('/journals', function(req, res, next) {
   	res.render('journals');
 });
 
+router.post('/journal', function(req, res, next) {
+	var dateTime = req.body.dateTime;
+	var journal = req.body.journal;
+});
+
 router.get('/search', function(req, res, next) {
 	res.locals.user = {name:"Mahesh"}
   	res.render('search');

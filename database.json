@@ -5,5 +5,12 @@
     "port":5432,
     "database":"digitaldiary"
   },
-  "qa": { "ENV": "OPENSHIFT_POSTGRESQL_DB_URL" }
+  "qa": { 
+  	"driver": "pg",
+    "host": {"ENV": "OPENSHIFT_POSTGRESQL_DB_HOST"},
+    "port": {"ENV": "OPENSHIFT_POSTGRESQL_DB_PORT"},
+    "database":"qa",
+    "user" : {"ENV": "OPENSHIFT_POSTGRESQL_DB_USERNAME"},
+    "password": {"ENV": "OPENSHIFT_POSTGRESQL_DB_PASSWORD"}
+  }
 }

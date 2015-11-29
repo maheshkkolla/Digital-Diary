@@ -7,9 +7,9 @@ $(function() {
     }).bind('dp.change', function (e) {
     	var date = new Date(e.date);
     	setDateTimeToShowCalendar(date);
-    	$('#dateTime').val(date.toString());
+    	$('#dateTime').val(date.toString()).trigger('change');
     });
-    $('#dateTime').val(new Date().toString());
+    $('#dateTime').val(new Date().toString())
 
     $('.bootstrap-datetimepicker-widget .datepicker').addClass('dashedBorder');
     $('.bootstrap-datetimepicker-widget .timepicker').addClass('dashedBorder');

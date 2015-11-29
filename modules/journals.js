@@ -4,6 +4,21 @@ var Dropbox = require('./dropbox');
 var journals = {};
 module.exports = journals;
 
+journals.getList = function(user, req, callback) {
+	var date = new Date(req.date.slice(0,15));
+	var date1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+	var date2 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1);
+	console.log(req.date, date)
+	knex('journals')
+	.where('date_time', '>=', date1)
+	.andWhere('date_time', '<', date2)
+	.then(function(journals){
+		callback(null, journals);
+	})
+	.catch(callback);
+
+}
+
 journals.create = function(user, journal, callback){
 	addJournalToDropbox(user, journal, function(err, body) {
 		if(err) callback(err, null);

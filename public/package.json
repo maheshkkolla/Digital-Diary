@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
-    "bower": "^1.4.2",
-    "html-md": "^3.0.2"
+    "bower": "^1.4.2"
   }
 }

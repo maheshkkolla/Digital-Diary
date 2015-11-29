@@ -10,6 +10,7 @@ var DropboxOAuth2Strategy = require('passport-dropbox-oauth2').Strategy;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var journals = require('./routes/journals');
 var usersModule  = require('./modules/users');
 var config = require('./config');
 
@@ -106,6 +107,7 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/journals', journals);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

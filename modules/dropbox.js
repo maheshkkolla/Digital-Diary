@@ -10,15 +10,17 @@ var Dropbox = function(accessToken) {
 }
 
 Dropbox.prototype = {
-	putFile: function(filePath, data) {
+	putFile: function(filePath, data, callback) {
 		var accessToken = this.accessToken;
 		this.options.url = config.dropbox.putFile.replace(/@PATH@/g, filePath);
 		this.options.url += "?"+qs.stringify({'access_token':accessToken});
 		this.options.body = data;
 		request.put(this.options, function(err, res, body) {
-			console.log("Err",err)
-			console.log("Res",res)
-			console.log("Body",body)
+			if(err) callback(err, null);
+			else {
+				body = JSON.parse(body);
+				callback(null, body);
+			}		
 		});
 	}	
 }

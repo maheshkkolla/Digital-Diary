@@ -10,4 +10,7 @@ $(function() {
     	$('#dateTime').val(date.toString());
     });
     $('#dateTime').val(new Date().toString());
+
+    $('.bootstrap-datetimepicker-widget .datepicker').addClass('dashedBorder');
+    $('.bootstrap-datetimepicker-widget .timepicker').addClass('dashedBorder');
 });

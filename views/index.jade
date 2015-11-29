@@ -3,6 +3,7 @@ extends layout
 block content
  script(src="/javascripts/tinymce/js/tinymce/tinymce.min.js")
  script(src="/javascripts/tinyMceConfig.js")
+ script(src="/javascripts/index.js")
  include _navbar
  div(class='myContainer')
   div(class="content")
@@ -14,9 +15,11 @@ block content
     form(action='/journals/create' method='POST')
      input(type='hidden' id='dateTime' name='dateTime') 
      div
+      input(type='text' placeholder='Title ...' name='title' id="titleOfJournal" class='form-control titleInput' required)
       textarea(name='journal' id='journal')
      div(class='container')
       button(type="submit" class='btn btn-primary pull-right') Submit
     
- include _footer     
+ include _footer
+
 

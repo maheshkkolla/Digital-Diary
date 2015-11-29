@@ -39,6 +39,9 @@ a {
 	margin-right: 70px;
 }
 
+.dashedBorder {
+	border-top:1px dashed;
+}
 .content {
 	margin-top: 40px;
 }
@@ -135,7 +138,17 @@ a {
 	margin-bottom: 20px !important;
 }
 
+.titleInput {
+	margin-bottom: 16px;
+    font-size: 40px !important;
+    height: auto !important;
+}
 
+.tinymceCustomBody {
+	font-size: 20px !important;
+	color: #000 !important;
+	background-color: #FFF !important;
+}
 
 
 

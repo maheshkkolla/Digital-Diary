@@ -8,7 +8,7 @@ journals.create = function(user, journal, callback){
 	addJournalToDropbox(user, journal, function(err, body) {
 		if(err) callback(err, null);
 		else{
-			var journalMetaData = { userId: user.id, filePath: body.path, dateTime: journal.dateTime};
+			var journalMetaData = { userId: user.id, title: journal.title, filePath: body.path, dateTime: journal.dateTime};
 			addJournalToDb(journalMetaData, callback);
 		}
 	});
@@ -23,7 +23,7 @@ var addJournalToDropbox = function(user,journal,callback) {
 
 var addJournalToDb = function(journal ,callback) {
 	knex('journals').returning('id')
-	.insert({user_id: journal.userId, file_path: journal.filePath, date_time: new Date(journal.dateTime), create_at: 'now()'})
+	.insert({user_id: journal.userId, title: journal.title, file_path: journal.filePath, date_time: new Date(journal.dateTime), create_at: 'now()'})
 	.then(function(createdIds) {
 		callback(null, createdIds[0]);
 	})

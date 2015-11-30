@@ -7,7 +7,8 @@ module.exports = journals;
 journals.getList = function(user, req, callback) {
 	var date = new Date(req.date.slice(0,15));
 	var date1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-	var date2 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1);
+	var date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
+	var date2 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate());
 	console.log(req.date, date)
 	knex('journals')
 	.where('date_time', '>=', date1)

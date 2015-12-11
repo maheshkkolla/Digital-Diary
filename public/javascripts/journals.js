@@ -1,6 +1,6 @@
 $(function() {
 	$('.bootstrap-datetimepicker-widget .timepicker').remove();
-	$('.dateTime .panel-footer b').html("");
+	$('.dateTime .panel-footer b').remove();
 
 	$('#dateTime').on('change', function(){
 		var date = $('#dateTime').val();

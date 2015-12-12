@@ -9,10 +9,10 @@ journals.getList = function(user, req, callback) {
 	var date1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
 	var date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
 	var date2 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate());
-	console.log(req.date, date)
 	knex('journals')
 	.where('date_time', '>=', date1)
 	.andWhere('date_time', '<', date2)
+	.andWhere('user_id', '=', user.id)
 	.then(function(journals){
 		callback(null, journals);
 	})

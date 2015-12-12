@@ -48,6 +48,10 @@ a {
 	margin-bottom: 50px;
 }
 
+.loader {
+    margin-top: 50px;
+}
+
 .navbar {
 	margin-bottom: 0px !important;
 }

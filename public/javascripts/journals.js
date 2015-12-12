@@ -4,6 +4,7 @@ $(function() {
 
 	$('#dateTime').on('change', function(){
 		$('#journals').html("");
+		$('#loader').show();
 		getJournalsCount();
 		getJournals(1);
 	});
@@ -27,7 +28,7 @@ var getJournals = function(page) {
     	type: 'GET'
 	}).done(function (journals) {
     	$('#journals').append(journals);
-    	if($('#journalsCount').val() <= page) return;// loader remove
+    	if($('#journalsCount').val() <= page) $('#loader').hide();
     	else getJournals(page + 1);
 	});
 }

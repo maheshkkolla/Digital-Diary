@@ -11,6 +11,7 @@ var DropboxOAuth2Strategy = require('passport-dropbox-oauth2').Strategy;
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var journals = require('./routes/journals');
+var contact = require('./routes/contact');
 var usersModule  = require('./modules/users');
 var config = require('./config');
 
@@ -96,6 +97,8 @@ app.get('/logout', function(req, res, next) {
   res.locals.user = '';
   res.redirect('/login');
 });
+
+app.use('/contact', contact);
 
 app.use(function (req, res, next) {
   if (req.isAuthenticated()) {

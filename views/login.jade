@@ -28,3 +28,20 @@ block content
    div(class='col-md-4')
     h3(class='title') Pricing
     div(class='content') It is absolutely free.
+ 
+ div(class='modal fade' role='dialog' id='query')
+  script(src='javascripts/home.js')
+  div(class='modal-dialog')
+   div(class='modal-content')
+    div(class='modal-header')
+     h3 Post your query. We will come back to you.
+    div(class='modal-body')
+     form(action='' method='' id='postQueryForm')
+      input(type='name' class='form-control' name='name' placeholder='Name' required)
+      br
+      input(type='email' class='form-control' name='email' placeholder='Email' required)
+      br
+      textarea(name='query'  rows=7 class='form-control' placeholder='Write your query here ...' required)
+      br
+      div(class='text-center')
+       button(type='submit' class='btn btn-primary') Post

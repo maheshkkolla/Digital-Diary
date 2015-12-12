@@ -43,6 +43,11 @@ a {
 .dashedBorder {
 	border-top:1px dashed;
 }
+
+.rightBorder {
+    border-right: 1px solid;
+}
+
 .content {
 	margin-top: 50px;
 	margin-bottom: 50px;
@@ -206,7 +211,25 @@ a {
     color: #1b63e4 !important;
 }
 
+.homeContent {
+    /*text-align: center;*/
+}
 
+.homeContent .title {
+    text-align: center;
+}
+
+.homeContent .content {
+    font-size: 18px;
+}
+
+.features {
+    padding-left: 0px;
+}
+
+.features li {
+    list-style-position: inside;
+}
 
 
 

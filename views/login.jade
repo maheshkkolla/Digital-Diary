@@ -1,13 +1,30 @@
 extends layout
 
 block content
- include _navbar
- div(class='jumbotron') 
-  div(class='col-md-2')
-  div(class='col-md-2')
-   div(class='name') Digital Diary
-  div(class='col-md-8 sideContent') 
-   div(class='notes') Don’t miss life moments. Record you life moments. We will help you
-   a(class='btn loginBtn' href='/auth/dropbox') Login with Dropbox
-   - if(error)
-    div(class='text-danger') #{error}
+ body(style='background-color:#d1e0fa !important;')
+  include _navbar
+  div(class='jumbotron') 
+   div(class='col-md-2')
+   div(class='col-md-2')
+    div(class='name') Digital Diary
+   div(class='col-md-8 sideContent') 
+    div(class='notes') Don’t miss life moments. Record you life moments. We will help you
+    a(class='btn loginBtn' href='/auth/dropbox') Login with Dropbox
+    - if(error)
+     div(class='text-danger') #{error}
+  div(class='container homeContent') 
+   div(class='col-md-4 rightBorder') 
+    h3(class='title') Features
+    div(class='content') 
+     ul(class='features')
+      li Unlimited Journals
+      li Style your content
+      li Multiple entries per day
+      li Date and Time
+      li Dropbox login 
+   div(class='col-md-4 rightBorder')   
+    h3(class='title') Security
+    div(class='content') It is fully private. No one can see your journals. Digital Diary does not store your journals. Your journals will be storing in your dropbox.
+   div(class='col-md-4')
+    h3(class='title') Pricing
+    div(class='content') It is absolutely free.

@@ -22,7 +22,17 @@ Dropbox.prototype = {
 				callback(null, body);
 			}		
 		});
-	}	
+	},
+	getFile: function(filePath, callback) {
+		var accessToken = this.accessToken;
+		this.options.url = config.dropbox.getFile.replace(/@PATH@/g, filePath);
+		this.options.url += "?"+qs.stringify({'access_token': accessToken});
+		request.get(this.options.url, function(err, res, body) {
+			if(res.statusCode == 404) body = 'File has been deleted from Dropbox'
+			if(err) callback(err, null);
+			else callback(null, body);
+		});	
+	}
 }
 
 

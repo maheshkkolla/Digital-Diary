@@ -4,7 +4,7 @@ var Dropbox = require('./dropbox');
 var journals = {};
 module.exports = journals;
 
-journals.getList = function(user, req, callback) {
+journals.getJournal = function(user, req, callback) {
 	var date = new Date(req.date.slice(0,15));
 	var date1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
 	var date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
@@ -13,11 +13,28 @@ journals.getList = function(user, req, callback) {
 	.where('date_time', '>=', date1)
 	.andWhere('date_time', '<', date2)
 	.andWhere('user_id', '=', user.id)
+	.orderBy('date_time')
+	.limit(1)
+	.offset((req.page-1) * 1)
 	.then(function(journals){
-		callback(null, journals);
+		getJournalfromDropbox(user, journals[0], callback);
 	})
 	.catch(callback);
+}
 
+journals.getCount = function(user, req, callback) {
+	var date = new Date(req.date.slice(0,15));
+	var date1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+	var date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
+	var date2 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate());
+	knex('journals').count('id')
+	.where('date_time', '>=', date1)
+	.andWhere('date_time', '<', date2)
+	.andWhere('user_id', '=', user.id)
+	.then(function(journals){
+		callback(null, journals[0].count);
+	})
+	.catch(callback);
 }
 
 journals.create = function(user, journal, callback){
@@ -30,12 +47,22 @@ journals.create = function(user, journal, callback){
 	});
 };
 
+var getJournalfromDropbox = function(user, journal, callback) {
+	var dropbox = new Dropbox(user.access_token);
+	dropbox.getFile(journal.file_path, function(err, journalContent){
+		if(err) callback(err, null);
+		else {
+			journal.content = journalContent;
+			callback(null, journal);
+		}
+	});
+}
+
 var addJournalToDropbox = function(user,journal,callback) {
 	var dropbox = new Dropbox(user.access_token);
 	var filePath = filePathFrom(new Date(journal.dateTime));
 	dropbox.putFile(filePath, journal.journal, callback);
 }
-
 
 var addJournalToDb = function(journal ,callback) {
 	knex('journals').returning('id')

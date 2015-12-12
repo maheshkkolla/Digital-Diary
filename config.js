@@ -8,7 +8,8 @@ var config = {
 			clientID: process.env.clientID,
     		clientSecret: process.env.clientSecret,
     		callbackURL: "http://localhost:3001/auth/dropbox-oauth2/callback",
-    		putFile: "https://content.dropboxapi.com/1/files_put/auto/@PATH@"
+    		putFile: "https://content.dropboxapi.com/1/files_put/auto/@PATH@",
+    		getFile: "https://content.dropboxapi.com/1/files/auto/@PATH@"
 		}
 	},
 	qa: {

@@ -6,10 +6,17 @@ router.get('/', function(req, res, next) {
   	res.render('journals');
 });
 
-router.get('/getList', function(req, res, next) {
-	journals.getList(req.session.user,req.query, function(err, journals) {
+router.get('/journal', function(req, res, next) {
+	journals.getJournal(req.session.user,req.query, function(err, journal) {
 		if(err) next(err);
-  		else res.render('_journalsList', {journals: journals, layout: false});
+  		else res.render('_journal', {journal: journal, layout: false});
+	});
+});
+
+router.get('/count', function(req, res, next) {
+	journals.getCount(req.session.user, req.query, function(err, count) {
+		if(err) next(err);
+		else res.send(count);
 	});
 });
 

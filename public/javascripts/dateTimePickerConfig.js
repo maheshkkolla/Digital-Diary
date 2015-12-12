@@ -6,7 +6,6 @@ $(function() {
         sideBySide: true
     }).bind('dp.change', function (e) {
     	var date = new Date(e.date);
-    	setDateTimeToShowCalendar(date);
     	$('#dateTime').val(date.toString()).trigger('change');
     });
     $('#dateTime').val(new Date().toString())

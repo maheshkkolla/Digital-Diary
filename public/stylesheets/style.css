@@ -169,6 +169,53 @@ a {
 }
 
 
+.jumbotron {
+    background-color: #6495ed !important;
+    color: #fff !important;
+    display: flex;
+    text-align: center;
+}
+
+.jumbotron .name {
+    font-size: 30px;
+    font-family: fantasy;
+    padding: 60px;
+    background-color: #18399a;
+    border-radius: 100px;
+    height: 200px;
+    width: 200px;
+}
+
+.jumbotron .notes {
+    font-size: 25px;
+    padding: 40px;
+}
+
+.jumbotron .sideContent {
+    margin-right: 60px;
+}
+
+.loginBtn {
+    border: 1px solid !important;
+    color: #fff;
+    font-size: 22px !important;
+}
+
+.loginBtn:hover {
+    border-color: #1b63e4 !important;
+    color: #1b63e4 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -140,29 +140,35 @@ a {
 	margin-bottom: 20px !important;
 }
 
-.titleInput {
-	margin-bottom: 16px;
-    font-size: 38px !important;
-    height: auto !important;
-    width: 100%;
-    border-top: 0pc;
-    border-left: 0px;
-    background-color: transparent;
-    border-right: 0px;
-    border-bottom: 2px solid;
-}
-
-.titleInput:focus {
-	box-shadow: 0px;
-	outline: none;
-}
-
 .tinymceCustomBody {
-	font-size: 20px !important;
+	font-size: 21px !important;
 	color: #000 !important;
 	background-color: #FFF !important;
+	/*background-color: #e9eefc !important;*/
+	line-height: 1.58;
+    letter-spacing: -0.003em;
 }
 
+.journal {
+    margin: 10px;
+    padding: 20px;
+    color: #000;
+    font-size: 20px;
+    background-color: #FFF;
+    border: 3px solid #18399a;
+}
+
+.journal .content {
+	font-size: 21px;
+    line-height: 1.58;
+    letter-spacing: -0.003em;
+}
+
+.journal .date {
+	text-align: right;
+    color: #103b89;
+    font-family: monospace;
+}
 
 
 

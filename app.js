@@ -18,8 +18,6 @@ var config = require('./config');
 var app = express();
 
 
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -126,6 +124,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
+    console.log("Error:", err)
     res.render('error', {
       message: err.message,
       error: err

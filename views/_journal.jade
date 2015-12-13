@@ -1,3 +1,10 @@
-div(class='journal')
- div(class='date') #{journal.date_time}
- div(class='content')!= journal.content
+div()
+ div(class='journal' id='journal#{journal.id}')
+  div(class='btn-group pull-right' role='group')
+   button(class='btn btn-default' title='Edit') 
+    span(class='glyphicon glyphicon-pencil bodyColor')
+   button(class='btn btn-default' name='delete' data_id='#{journal.id}') 
+    span(class='glyphicon glyphicon-trash text-danger')
+  br 
+  div(class='date') #{journal.date_time}
+  div(class='content')!= journal.content

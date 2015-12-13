@@ -9,7 +9,8 @@ var config = {
     		clientSecret: process.env.clientSecret,
     		callbackURL: "http://localhost:3001/auth/dropbox-oauth2/callback",
     		putFile: "https://content.dropboxapi.com/1/files_put/auto/@PATH@",
-    		getFile: "https://content.dropboxapi.com/1/files/auto/@PATH@"
+    		getFile: "https://content.dropboxapi.com/1/files/auto/@PATH@",
+    		deleteFile: "https://api.dropboxapi.com/1/fileops/delete"
 		}
 	},
 	qa: {

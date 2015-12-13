@@ -47,6 +47,28 @@ journals.create = function(user, journal, callback){
 	});
 };
 
+journals.deleteBy = function(id, user, callback) {
+	knex.select('file_path').from('journals').where('id', id).then(function(journals) {
+		deleteFromDropBox(user, journals[0].file_path, function(err, deleted) {
+			if(err) callback(err, null);
+			else deleteJournalRow(id, callback);
+		});
+	}).catch(callback)
+}
+
+var deleteJournalRow = function(id, callback) {
+	knex('journals')
+	.where('id', id)
+	.del().then(function(deletedRow) { 
+		callback(null, deletedRow)
+	}).catch(callback);
+}
+
+var deleteFromDropBox = function(user, path, callback) {
+	var dropbox = new Dropbox(user.access_token);
+	dropbox.deleteFile(path, callback);
+}
+
 var getJournalfromDropbox = function(user, journal, callback) {
 	var dropbox = new Dropbox(user.access_token);
 	dropbox.getFile(journal.file_path, function(err, journalContent){

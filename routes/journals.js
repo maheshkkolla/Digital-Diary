@@ -28,4 +28,11 @@ router.post('/create', function(req, res, next) {
 
 });
 
+router.delete('/journal', function(req, res, next) {
+	journals.deleteBy(req.query.id, req.session.user, function(err, status) {
+		if(err) next(err)
+		else res.send('OK')
+	});
+});
+
 module.exports = router;

@@ -5,6 +5,10 @@ body {
   color: #103b89 !important;
 }
 
+.bodyColor {
+  color: #103b89 !important;
+}
+
 a {
   color: #00B7FF;
 }
@@ -168,7 +172,7 @@ a {
 }
 
 .journal .date {
-	text-align: right;
+	/*text-align: right;*/
     color: #103b89;
     font-family: monospace;
 }
@@ -229,6 +233,39 @@ a {
 
 .features li {
     list-style-position: inside;
+}
+
+.notifiers {    
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    max-width: 30%;
+    height: auto;
+    z-index: 1000;
+}
+
+.notifiers .notification {
+    color: #fff;
+    background-color: #000;
+    padding: 10px;
+    width: auto;
+    margin: 5px;
+
+}
+
+.notifiers .notification .message {
+    font-size: 22px;
+    margin-right: 10px;
+}
+
+.notifiers .notification .close {
+    color: #fff;
+    opacity: 0.5;
+    font-size: 14px;
+    margin: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 

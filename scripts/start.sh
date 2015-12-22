@@ -1,9 +1,19 @@
-npm install
-npm run migrateUp -e $1
+#!/bin/bash
+set -e
 
-cd public
+echo "************ INSTALLING DEPENDENCIES ************"
 npm install
-npm run bower install
+echo "************ RUNNING MIGRATIONS FOR ************"
+echo $ENV
+
+./node_modules/db-migrate/bin/db-migrate up -e $ENV
+
+echo "************ GO TO PUBLIC DIRECTORY ************"
+cd public
+ echo "************ INSTALLING CLIENT SIDE DEPENDENCIES ************"
+ npm install
+ npm run bower install
 cd ..
 
-./node_modules/nodemon/bin/nodemon.js ./bin/www
+echo "************ STARTING THE SERVER ************"
+node ./bin/www

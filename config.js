@@ -16,14 +16,23 @@ var config = {
 	qa: {
 		db: {
 			client: 'pg',
-			connection : process.env.OPENSHIFT_POSTGRESQL_DB_URL
+			connection : {
+				host     : '127.0.0.1',
+                user     : process.env.OPENSHIFT_POSTGRESQL_DB_USERNAME,
+                password : process.env.OPENSHIFT_POSTGRESQL_DB_PASSWORD,
+                database : 'digitaldiary'
+			}
 		},
 		dropbox: {
 			clientID: process.env.clientID,
-    		clientSecret: process.env.clientSecret
+    		clientSecret: process.env.clientSecret,
+    		callbackURL: "https://digitaldiary-245apps.rhcloud.com/auth/dropbox-oauth2/callback",
+    		putFile: "https://content.dropboxapi.com/1/files_put/auto/@PATH@",
+    		getFile: "https://content.dropboxapi.com/1/files/auto/@PATH@",
+    		deleteFile: "https://api.dropboxapi.com/1/fileops/delete"
 		}
 	}
 }
 
-if(process.env.ENV == 'QA') module.exports = config.qa;
+if(process.env.ENV == 'qa') module.exports = config.qa;
 else module.exports = config.dev;

@@ -17,7 +17,8 @@ journals.getJournal = function(user, req, callback) {
 	.limit(1)
 	.offset((req.page-1) * 1)
 	.then(function(journals){
-		getJournalfromDropbox(user, journals[0], callback);
+		journals.length && getJournalfromDropbox(user, journals[0], callback);
+		journals.length || callback(null, null);
 	})
 	.catch(callback);
 }

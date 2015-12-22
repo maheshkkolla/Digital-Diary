@@ -8,6 +8,8 @@ $(function() {
 		getJournalsCount();
 		getJournals(1);
 	});
+
+	$('#dateTime').trigger('change')
 });
 
 var getJournalsCount = function() {

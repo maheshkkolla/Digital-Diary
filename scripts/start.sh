@@ -12,7 +12,7 @@ echo "************ GO TO PUBLIC DIRECTORY ************"
 cd public
  echo "************ INSTALLING CLIENT SIDE DEPENDENCIES ************"
  npm install
- npm run bower install
+ ./node_modules/bower/bin/bower install
 cd ..
 
 echo "************ STARTING THE SERVER ************"

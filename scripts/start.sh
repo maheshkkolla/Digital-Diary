@@ -12,6 +12,10 @@ echo "************ GO TO PUBLIC DIRECTORY ************"
 cd public
  echo "************ INSTALLING CLIENT SIDE DEPENDENCIES ************"
  npm install
+ if [ $ENV = 'qa' ]
+ then
+  HOME=$OPENSHIFT_DATA_DIR
+ fi
  ./node_modules/bower/bin/bower install
 cd ..
 

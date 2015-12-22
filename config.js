@@ -17,7 +17,7 @@ var config = {
 		db: {
 			client: 'pg',
 			connection : {
-				host     : '127.0.0.1',
+				host     : process.env.OPENSHIFT_POSTGRESQL_DB_URL,
                 user     : process.env.OPENSHIFT_POSTGRESQL_DB_USERNAME,
                 password : process.env.OPENSHIFT_POSTGRESQL_DB_PASSWORD,
                 database : 'digitaldiary'

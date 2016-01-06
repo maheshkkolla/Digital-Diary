@@ -163,6 +163,7 @@ a {
 .journal {
     margin: 10px;
     padding: 20px;
+    padding-top: 10px;
     color: #000;
     font-size: 20px;
     background-color: #FFF;

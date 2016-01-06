@@ -5,6 +5,10 @@ body {
   color: #103b89 !important;
 }
 
+.modal-dialog {
+    width: 80% !important;
+}
+
 .bodyColor {
   color: #103b89 !important;
 }
@@ -163,6 +167,7 @@ a {
     font-size: 20px;
     background-color: #FFF;
     border: 3px solid #18399a;
+    box-shadow: 4px 4px 2px #ccccff;
 }
 
 .journal .content {

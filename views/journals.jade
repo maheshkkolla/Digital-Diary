@@ -1,7 +1,6 @@
 extends layout
 
 block content
- script(src="/javascripts/tinymce/js/tinymce/tinymce.min.js")
  include _navbar
  div(class='myContainer')
   div(class="content")
@@ -14,4 +13,18 @@ block content
     div(class='text-center' id='loader' class='loader' style="display:none;")
      img(src='/loading.gif')
  include _footer 
+
+ div(class='modal fade' role='dialog' id='editModal')
+  div(class='modal-dialog')
+   div(class='modal-content')
+    div(class='modal-header')
+     h4 Edit the Journal
+    div(class='modal-body')
+     form()
+      input(type='hidden' id='journalId')
+      textarea(name='journal' id='journal')
+    div(class='modal-footer')
+     button(class='btn btn-lg btn-primary' id='saveEditedBtn') Save
+ script(src="/javascripts/tinymce/js/tinymce/tinymce.min.js")
+ script(src="/javascripts/tinyMceConfig.js")
  script(src="/javascripts/journals.js")

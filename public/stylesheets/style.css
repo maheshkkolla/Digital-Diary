@@ -155,7 +155,6 @@ a {
 	font-size: 21px !important;
 	color: #000 !important;
 	background-color: #FFF !important;
-	/*background-color: #e9eefc !important;*/
 	line-height: 1.58;
     letter-spacing: -0.003em;
 }
@@ -253,7 +252,7 @@ a {
 .notifiers .notification {
     color: #fff;
     background-color: #000;
-    padding: 10px;
+    padding: 20px;
     width: auto;
     margin: 5px;
 

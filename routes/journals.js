@@ -7,9 +7,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/journal', function(req, res, next) {
-	journals.getJournal(req.session.user,req.query, function(err, journal) {
+	journals.getJournal(req.session.user, req.query, function(err, journal) {
 		if(err) next(err);
   		else res.render('_journal', {journal: journal, layout: false});
+	});
+});
+
+router.put('/edit', function(req, res, next) {
+	journals.edit(req.session.user, req.body, function(err, edited) {
+		if(err) next(err);
+		else res.send("OK");
 	});
 });
 
@@ -29,9 +36,9 @@ router.post('/create', function(req, res, next) {
 });
 
 router.delete('/journal', function(req, res, next) {
-	journals.deleteBy(req.query.id, req.session.user, function(err, status) {
-		if(err) next(err)
-		else res.send('OK')
+	journals.deleteBy(req.session.user, req.query.id, function(err, status) {
+		if(err) next(err);
+		else res.send('OK');
 	});
 });
 

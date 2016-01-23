@@ -4,3 +4,4 @@ start_dev.sh
 bower_components
 bower_components
 npm-debug.log
+.idea

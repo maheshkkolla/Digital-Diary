@@ -9,8 +9,36 @@ $(function() {
 		getJournals(1);
 	});
 
-	$('#dateTime').trigger('change')
+	$('#dateTime').trigger('change');
+
+
+	$('#saveEditedBtn').on('click', function() {
+		$('#editModal').modal('hide');
+		var notification = notify({message: 'Editing ...'});
+		var journalContent = tinyMCE.get('journal').getContent();
+		var id = $('#journalId').val();
+		 $.ajax({
+	     	url: '/journals/edit',
+	     	type: 'PUT',
+			data: {
+				'id': id,
+				'journal': journalContent
+			}
+		 }).done(function (status) {
+			 removeNotification(notification);
+		 	if(status == 'OK') {
+		 		$('#journal'+id+' .content').html(journalContent);
+		 		notify({message: 'Journal successfully edited.'});
+		 	}
+		 	else editFailure();
+		 }).fail(editFailure);
+	});
 });
+
+var editFailure = function() {
+	$('#editModal').modal('hide');
+	notify({message: 'Error occurred while editing the Journal'});
+};
 
 var getJournalsCount = function() {
 	var date = $('#dateTime').val();
@@ -39,12 +67,12 @@ var getJournals = function(page) {
 }
 
 var addActions = function() {
-   var elements = $("[name='delete']")
+   var elements = $("[name='delete']");
    for(var i=0; i<elements.length; i++) {
    		var element = elements[i];
-   		var id = $(element).attr('data_id')
+   		var id = $(element).attr('data_id');
    		var conformation = "<button class='btn btn-default' name='deleteYes' onclick='deleteJournal("+id+")'>Yes</button> " +
-   		" <button class='btn btn-default' name='deleteNo' onclick='dismissPopover()'>No</button>"
+   		" <button class='btn btn-default' name='deleteNo' onclick='dismissPopover()'>No</button>";
 
    		$(element).popover({
 			html: true,
@@ -58,12 +86,21 @@ var addActions = function() {
     		content: conformation
 		});
 
-		$(element).on('click', function(event) {
+		$(element).on('click', function() {
 			$(this).popover('toggle')
 		});
     }
 
-}
+    $("[name='edit']").on('click', function() {
+    	var element = this;
+    	var journalId = $(element).attr('data_id');
+    	var journalContent = $('#journal'+journalId+' .content').html();
+    	tinyMCE.get('journal').setContent(journalContent);
+    	$('#editModal').modal('show');
+		$('#journalId').val(journalId)
+    });
+
+};
 
 var deleteJournal = function(id) {
 	$.ajax({
@@ -77,13 +114,11 @@ var deleteJournal = function(id) {
 		else notify({message: 'Error occured while deleting the Journal'});
 	});
 	$('.popover').popover('hide');
-}
+};
 
 var dismissPopover = function() {
 	$('.popover').popover('hide');
-}
-
-
+};
 
 
 

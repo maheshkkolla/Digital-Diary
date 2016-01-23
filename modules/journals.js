@@ -21,12 +21,12 @@ journals.getJournal = function(user, req, callback) {
 		journals.length || callback(null, null);
 	})
 	.catch(callback);
-}
+};
 
 journals.getCount = function(user, req, callback) {
 	var date = new Date(req.date.slice(0,15));
 	var date1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-	var date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
+	date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
 	var date2 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate());
 	knex('journals').count('id')
 	.where('date_time', '>=', date1)
@@ -36,7 +36,7 @@ journals.getCount = function(user, req, callback) {
 		callback(null, journals[0].count);
 	})
 	.catch(callback);
-}
+};
 
 journals.create = function(user, journal, callback){
 	addJournalToDropbox(user, journal, function(err, body) {
@@ -48,14 +48,27 @@ journals.create = function(user, journal, callback){
 	});
 };
 
-journals.deleteBy = function(id, user, callback) {
+journals.deleteBy = function(user, id, callback) {
 	knex.select('file_path').from('journals').where('id', id).then(function(journals) {
 		deleteFromDropBox(user, journals[0].file_path, function(err, deleted) {
 			if(err) callback(err, null);
 			else deleteJournalRow(id, callback);
 		});
 	}).catch(callback)
-}
+};
+
+journals.edit = function(user, data, callback) {
+	knex.select('file_path').from('journals').where('id', data.id).then(function(journals) {
+		if(journals.length > 0) {
+			var journalData = {
+				journal: data.journal,
+				filePath: journals[0].file_path
+			};
+			addJournalToDropbox(user, journalData, callback);
+		}
+		else callback(true, null);
+	}).catch(callback);
+};
 
 var deleteJournalRow = function(id, callback) {
 	knex('journals')
@@ -63,12 +76,12 @@ var deleteJournalRow = function(id, callback) {
 	.del().then(function(deletedRow) { 
 		callback(null, deletedRow)
 	}).catch(callback);
-}
+};
 
 var deleteFromDropBox = function(user, path, callback) {
 	var dropbox = new Dropbox(user.access_token);
 	dropbox.deleteFile(path, callback);
-}
+};
 
 var getJournalfromDropbox = function(user, journal, callback) {
 	var dropbox = new Dropbox(user.access_token);
@@ -79,13 +92,13 @@ var getJournalfromDropbox = function(user, journal, callback) {
 			callback(null, journal);
 		}
 	});
-}
+};
 
 var addJournalToDropbox = function(user,journal,callback) {
 	var dropbox = new Dropbox(user.access_token);
-	var filePath = filePathFrom(new Date(journal.dateTime));
+	var filePath = journal.filePath || filePathFrom(new Date(journal.dateTime));
 	dropbox.putFile(filePath, journal.journal, callback);
-}
+};
 
 var addJournalToDb = function(journal ,callback) {
 	knex('journals').returning('id')
@@ -94,11 +107,11 @@ var addJournalToDb = function(journal ,callback) {
 		callback(null, createdIds[0]);
 	})
 	.catch(callback);
-}
+};
 
 
 var filePathFrom = function(date) {
 	var path = '/' + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate() + "/";
 	var fileName = new Buffer(new Date().toString()).toString('base64');
 	return(path + fileName)
-}
+};

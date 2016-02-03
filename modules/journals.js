@@ -1,3 +1,4 @@
+require('./utils');
 var config = require('../config')
 var knex = require('knex')(config.db);
 var Dropbox = require('./dropbox'); 
@@ -5,13 +6,10 @@ var journals = {};
 module.exports = journals;
 
 journals.getJournal = function(user, req, callback) {
-	var date = new Date(req.date.slice(0,15));
-	var date1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-	var date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
-	var date2 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate());
+	var date = req.date.toDate();
 	knex('journals')
-	.where('date_time', '>=', date1)
-	.andWhere('date_time', '<', date2)
+	.where('date_time', '>=', date.toDbString())
+	.andWhere('date_time', '<', date.next().toDbString())
 	.andWhere('user_id', '=', user.id)
 	.orderBy('date_time')
 	.limit(1)
@@ -24,13 +22,10 @@ journals.getJournal = function(user, req, callback) {
 };
 
 journals.getCount = function(user, req, callback) {
-	var date = new Date(req.date.slice(0,15));
-	var date1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-	date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
-	var date2 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate());
+	var date = req.date.toDate();
 	knex('journals').count('id')
-	.where('date_time', '>=', date1)
-	.andWhere('date_time', '<', date2)
+	.where('date_time', '>=', date.toDbString())
+	.andWhere('date_time', '<', date.next().toDbString())
 	.andWhere('user_id', '=', user.id)
 	.then(function(journals){
 		callback(null, journals[0].count);

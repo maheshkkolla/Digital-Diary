@@ -98,6 +98,7 @@ app.get('/logout', function(req, res, next) {
 
 app.get('/ping', function(req, res, next) {
     res.send('pong');
+    res.end();
 });
 app.use('/contact', contact);
 

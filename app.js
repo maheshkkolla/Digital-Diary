@@ -96,6 +96,9 @@ app.get('/logout', function(req, res, next) {
   res.redirect('/login');
 });
 
+app.get('/ping', function(req, res, next) {
+    res.send('pong');
+});
 app.use('/contact', contact);
 
 app.use(function (req, res, next) {

@@ -27,10 +27,10 @@ router.get('/count', function(req, res, next) {
 	});
 });
 
-router.post('/create', function(req, res, next) {
-	journals.create(req.session.user,req.body, function(err, sucess) {
+router.post('/', function(req, res, next) {
+	journals.create(req.session.user,req.body, function(err, success) {
 		if(err) next(err);
-		else res.redirect('/journals');
+		else res.send('OK');
 	});
 
 });

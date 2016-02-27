@@ -49,7 +49,7 @@ var getJournalsCount = function() {
 		if(count > 0)
     		$('#journalsCount').val(count);
 	});
-}
+};
 
 var getJournals = function(page) {
 	var date = $('#dateTime').val();
@@ -64,7 +64,7 @@ var getJournals = function(page) {
     	}
     	else getJournals(page + 1);
 	});
-}
+};
 
 var addActions = function() {
    var elements = $("[name='delete']");

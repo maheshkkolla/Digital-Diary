@@ -1,25 +1,20 @@
 extends layout
 
 block content
- script(src="/javascripts/tinymce/js/tinymce/tinymce.min.js")
- script(src="/javascripts/tinyMceConfig.js")
- script(src="/javascripts/index.js")
- include _navbar
- div(class='myContainer content')
-  div(class="")
-   div(class='container')
-    include _showDateTimeCalendar
-    div(class='col-md-1')
-    include _dateTimePicker
-   div(class='myContainer')
-    form(action='/journals/create' method='POST')
-     input(type='hidden' id='dateTime' name='dateTime') 
-     div
-      div(class='myContainer')
-      textarea(name='journal' id='journal')
-     div(class='container')
-      button(type="submit" class='btn btn-primary pull-right') Submit
-    
- include _footer
+    script(src="/javascripts/tinymce/js/tinymce/tinymce.min.js")
+    script(src="/javascripts/tinyMceConfig.js")
+    script(src="/javascripts/index.js")
+    include _navbar
+    div(class='myContainer content')
+        div(class='editor')
+            div(class="col-md-2")
+                include _showDateTimeCalendar
+            div(class='col-md-10')
+                div(class='myToolbar')
+                input(type='hidden' id='dateTime' name='dateTime')
+                //textarea(id='journal' name='journal')
+                div(id='journal' class='journalContent tinymceCustomBody')
+
+    include _footer
 
 

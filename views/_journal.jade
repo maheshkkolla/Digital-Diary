@@ -8,6 +8,6 @@ div()
      span(class='glyphicon glyphicon-trash text-danger')
    br 
    div(class='date') #{journal.date_time}
-   div(class='content')!= journal.content
+   div(class='journalContent')!= journal.content
  - else
   div(class='text-center lead') No journals available

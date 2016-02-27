@@ -1,6 +1,5 @@
 $(function() {
-    $('#datetimepicker12').datetimepicker({
-        inline: true,
+    $('#datetimepicker1').datetimepicker({
         maxDate: new Date(),
         defaultDate: new Date(),
         sideBySide: true

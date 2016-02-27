@@ -7,12 +7,14 @@ block content
     include _navbar
     div(class='myContainer content')
         div(class='editor')
+            div(class="actions")
+                div(class="action")
+                    include _dateTimePicker
             div(class="col-md-2")
                 include _showDateTimeCalendar
             div(class='col-md-10')
                 div(class='myToolbar')
                 input(type='hidden' id='dateTime' name='dateTime')
-                //textarea(id='journal' name='journal')
                 div(id='journal' class='journalContent tinymceCustomBody')
 
     include _footer

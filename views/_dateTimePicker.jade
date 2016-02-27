@@ -1,7 +1,8 @@
-div(style="overflow:hidden;" class="col-md-6")
- div(class='infoLabel') Select Date :
- div(class="form-group")
-  div(id="datetimepicker12")
+div(id="datetimepicker1" class="input-group" style="display:block; height:100%;")
+ input(type='text' style="display:none;")
+ span(class="input-group-addon dateSelector")
+  span(class="glyphicon glyphicon-calendar")
+
 script(src="/bower_components/moment/min/moment.min.js")
 script(src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")
 link(rel='stylesheet', href='/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')  	

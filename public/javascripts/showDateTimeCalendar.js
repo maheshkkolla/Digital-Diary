@@ -11,7 +11,7 @@ var setDateTimeToShowCalendar = function(date) {
 	$('.dateTime .panel-body div').html(onlyDate);
 	$('.dateTime .panel-body b').html(day);
 	$('.dateTime .panel-footer b').html(time);
-}
+};
 
 $(function() {
     setDateTimeToShowCalendar(new Date());

@@ -251,7 +251,6 @@ body {
 }
 
 .notifiers .notification {
-    color: #fff;
     background-color: #000;
     padding: 20px;
     width: auto;
@@ -262,6 +261,18 @@ body {
 .notifiers .notification .message {
     font-size: 22px;
     margin-right: 10px;
+}
+
+.notifiers .notification .message.info {
+    color: #FFFFFF;
+}
+
+.notifiers .notification .message.success {
+    color: #90ee90;
+}
+
+.notifiers .notification .message.failure {
+    color: #FF0000;
 }
 
 .notifiers .notification .close {

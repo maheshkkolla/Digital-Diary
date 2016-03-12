@@ -45,16 +45,16 @@ Journal.prototype = {
 
 var JournalCreationView = function() {
 	var self = this;
-	this.journalTextbox = $("#journal");
-	this.dateTime = new Date().toString();
-	this.dateTimecalendar = new DateTimeCalendar(this.dateTime);
+	self.journalTextbox = $("#journal");
+	self.dateTime = new Date().toString();
+	self.dateTimeCalendar = new DateTimeCalendar(this.dateTime);
+	self.dateTimePicker = new DateTimePicker(this.dateTime);
+	self.dateTimePicker.bindChange(function(e) {
+		self.dateChanged(e);
+	});
 	var page = $(document);
 	page.on("click", "#saveJournal", function(e) {
 		self.createJournal($(this), e);
-	});
-
-	page.on("change", "#dateTime", function(e) {
-		self.changeCalender($(this), e);
 	});
 };
 
@@ -112,10 +112,9 @@ JournalCreationView.prototype = {
 		this.creating.close();
 	},
 
-	changeCalender: function(element, event) {
-		var dateTime = element.val();
-		this.dateTime = dateTime;
-		this.dateTimecalendar.set(dateTime);
+	dateChanged: function(e) {
+		this.dateTime = new Date(e.date);
+		this.dateTimeCalendar.set(this.dateTime);
 	}
 };
 

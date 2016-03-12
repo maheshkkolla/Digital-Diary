@@ -47,6 +47,7 @@ var JournalCreationView = function() {
 	var self = this;
 	this.journalTextbox = $("#journal");
 	this.dateTime = new Date().toString();
+	this.dateTimecalendar = new DateTimeCalendar(this.dateTime);
 	var page = $(document);
 	page.on("click", "#saveJournal", function(e) {
 		self.createJournal($(this), e);
@@ -114,7 +115,7 @@ JournalCreationView.prototype = {
 	changeCalender: function(element, event) {
 		var dateTime = element.val();
 		this.dateTime = dateTime;
-		setDateTimeToShowCalendar(dateTime);
+		this.dateTimecalendar.set(dateTime);
 	}
 };
 

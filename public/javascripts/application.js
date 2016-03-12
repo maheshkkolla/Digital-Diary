@@ -1,11 +1,3 @@
-$(function() {
-	$.getScript("javascripts/utils.js").done(function() {
-		console.log("Loaded script")
-	}).fail(function() {
-		console.error("Failed to load javascript files! Please refresh the page.");
-	});
-});
-
 var Notification = function(arg) {
 	this.options = {};
 	if(u.isType(arg, 'object')) this.options = arg;

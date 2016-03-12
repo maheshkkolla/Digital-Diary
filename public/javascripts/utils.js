@@ -51,6 +51,10 @@ String.prototype.concatWithSpace = function(other) {
     return this.concat(' ').concat(other)
 };
 
+String.prototype.is = function(other) {
+    return (this == other);
+};
+
 
 
 

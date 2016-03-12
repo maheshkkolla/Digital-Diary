@@ -43,28 +43,81 @@ Journal.prototype = {
 };
 
 
-$(function() {
-	$('#dateTime').on('change', function() {
-    	setDateTimeToShowCalendar($('#dateTime').val());
+var JournalCreationView = function() {
+	var self = this;
+	this.journalTextbox = $("#journal");
+	this.dateTime = new Date().toString();
+	var page = $(document);
+	page.on("click", "#saveJournal", function(e) {
+		self.createJournal($(this), e);
 	});
 
-	$('#saveJournal').on('click', function() {
-		var notification = new Notification({message: 'Creating Journal ...', autoClose: false, close: false}).notify();
-		var journalContent = $("#journal").html();
-		var dateTime = $("#dateTime").val();
-		var journal = new Journal(null, dateTime, journalContent);
+	page.on("change", "#dateTime", function(e) {
+		self.changeCalender($(this), e);
+	});
+};
 
+JournalCreationView.prototype = {
+	createJournal: function(element, event) {
+		this.notifyCreatingJournal();
+		this.journalContent = this.journalTextbox.html();
+		var self = this;
+		var journal = new Journal(null, this.dateTime, this.journalContent);
 		journal.save()
-			.done(function (status) {
-				notification.close();
-				if(status == 'OK') {
-					new Notification({message: 'Journal created.', type: 'success'}).notify();
-				}
-				else creationFailed();
-			}).fail(creationFailed);
-	});
+		.done(function (status) {
+			self.handleCreationSuccess(status);
+		}).fail(function() {
+			self.handleCreationFailure();
+		});
+	},
 
-	var creationFailed = function() {
-		new Notification({message: 'Error occurred while creating the Journal', type: 'failure'}).notify();
-	};
+	handleCreationSuccess: function(status) {
+		this.closeCreatingNotification();
+		if(status.is("OK")) {
+			this.notifyCreationSuccess();
+		}
+		else this.notifyCreationFailed();
+	},
+
+	handleCreationFailure: function() {
+		this.closeCreatingNotification();
+		this.notifyCreationFailed();
+	},
+
+	notifyCreationFailed: function() {
+		new Notification({
+			message: 'Error occurred while creating the Journal',
+			autoClose: false,
+			type: 'failure'
+		}).notify();
+	},
+
+	notifyCreationSuccess: function() {
+		new Notification({
+			message: 'Journal created.',
+			type: 'success'
+		}).notify();
+	},
+
+	notifyCreatingJournal: function() {
+		this.creating = new Notification({
+			message: 'Creating Journal ...',
+			autoClose: false,
+			close: false
+		}).notify();
+	},
+
+	closeCreatingNotification: function() {
+		this.creating.close();
+	},
+
+	changeCalender: function(element, event) {
+		var dateTime = element.val();
+		this.dateTime = dateTime;
+		setDateTimeToShowCalendar(dateTime);
+	}
+};
+
+$(function() {
+	new JournalCreationView();
 });

@@ -42,6 +42,10 @@ Utils.prototype = {
 
     eachOnKeys: function(arr, callback) {
         this.getKeys(arr).forEach(callback);
+    },
+
+    newDateString: function(){
+        return new Date().toString();
     }
 };
 var u = new Utils();

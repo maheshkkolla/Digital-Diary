@@ -20,18 +20,22 @@ var Notification = function(arg) {
 Notification.prototype = {
 	setTime: function(time) {
 		this.options.time = time;
+		return this;
 	},
 
 	setMessage: function(message) {
 		this.options.message = message;
+		return this;
 	},
 
 	setClose: function(close) {
 		this.options.close = close;
+		return this;
 	},
 
 	setAutoClose: function(autoClose) {
 		this.options.autoClose = autoClose;
+		return this;
 	},
 
 	close: function() {
@@ -85,6 +89,48 @@ Notification.prototype = {
 
 		$('.notifiers').append(this.notification);
 		return this;
+	}
+};
+
+
+var Ajax = function(options) {
+	this.options = options || {};
+};
+
+Ajax.prototype = {
+	setUrl: function(url) {
+		this.options.url = url;
+		return this;
+	},
+
+	setType: function(type) {
+		this.options.type = type;
+		return this;
+	},
+
+	setData: function(data) {
+		this.options.data = data;
+		return this;
+	},
+
+	setQueryParams: function(params) {
+		var allParams = u.mapOnKeys(params, function(key) {
+			return key.concat("=").concat(params[key]);
+		});
+		this.options.url = this.options.url.concat("?").concat(allParams.join("&"));
+		return this;
+	},
+
+	setUrlParams: function(params) {
+		var self = this;
+		u.eachOnKeys(params, function(key) {
+			self.options.url.replace(key, params[key]);
+		});
+		return this;
+	},
+
+	call: function() {
+		return $.ajax(this.options);
 	}
 };
  

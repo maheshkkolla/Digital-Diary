@@ -30,6 +30,18 @@ Utils.prototype = {
 
     isType: function (variable, type) {
         return (typeof variable == type)
+    },
+
+    getKeys: function(obj) {
+        return Object.keys(obj);
+    },
+
+    mapOnKeys: function(arr, callback) {
+        this.getKeys(arr).map(callback);
+    },
+
+    eachOnKeys: function(arr, callback) {
+        this.getKeys(arr).forEach(callback);
     }
 };
 var u = new Utils();

@@ -45,6 +45,7 @@ Journal.prototype = {
 
 var JournalCreationView = function() {
 	var self = this;
+	self.element = $("#editor");
 	self.journalTextbox = $("#journal");
 	self.dateTime = u.newDateString();
 	self.dateTimeCalendar = new DateTimeCalendar(this.dateTime);
@@ -56,11 +57,20 @@ JournalCreationView.prototype = {
 
 	bindEvents: function() {
 		var self = this;
+		var page = $(document);
 		self.dateTimePicker.bindChange(function(e) {
 			self.dateChanged(e);
 		});
-		$(document).on("click", "#saveJournal", function(e) {
+		page.on("click", "#saveJournal", function(e) {
 			self.createJournal($(this), e);
+		});
+		page.scroll(function() {
+			var toolbar = $("#mceu_19");
+			if(page.scrollTop() >= (self.element[0].scrollHeight - 100)) {
+				toolbar.hide();
+			} else {
+				toolbar.show();
+			}
 		});
 	},
 

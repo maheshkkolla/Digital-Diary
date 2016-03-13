@@ -36,8 +36,8 @@ Utils.prototype = {
         return Object.keys(obj);
     },
 
-    mapOnKeys: function(arr, callback) {
-        this.getKeys(arr).map(callback);
+    mapOnKeys: function(obj, callback) {
+         return this.getKeys(obj).map(callback);
     },
 
     eachOnKeys: function(arr, callback) {

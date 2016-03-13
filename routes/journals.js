@@ -6,10 +6,18 @@ router.get('/', function(req, res, next) {
   	res.render('journals');
 });
 
-router.get('/journal', function(req, res, next) {
-	journals.getJournal(req.session.user, req.query, function(err, journal) {
+router.get("/ids", function(req, res, next) {
+	journals.getIds(req.session.user, req.query, function(err, ids) {
 		if(err) next(err);
-  		else res.render('_journal', {journal: journal, layout: false});
+		else res.json(ids);
+	});
+});
+
+router.get("/:id", function(req, res, next) {
+	var id = req.params.id;
+	journals.getJournal(req.session.user, id, function(err, journal) {
+		if(err) next(err);
+		else res.render('_journal', {journal: journal, layout: false});
 	});
 });
 

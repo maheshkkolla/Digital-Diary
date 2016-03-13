@@ -16,3 +16,10 @@ Date.prototype.toDbString = function() {
 Date.prototype.next = function() {
     return(new Date(this.getTime() + 24 * 60 * 60 * 1000));
 };
+
+//Array Utils
+Array.prototype.getArrayOf = function(key) {
+    return this.map(function(obj) {
+        return obj[key];
+    });
+};

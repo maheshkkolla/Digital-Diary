@@ -5,15 +5,9 @@ var Dropbox = require('./dropbox');
 var journals = {};
 module.exports = journals;
 
-journals.getJournal = function(user, req, callback) {
-	var date = req.date.toDate();
+journals.getJournal = function(user, id, callback) {
 	knex('journals')
-	.where('date_time', '>=', date.toDbString())
-	.andWhere('date_time', '<', date.next().toDbString())
-	.andWhere('user_id', '=', user.id)
-	.orderBy('date_time')
-	.limit(1)
-	.offset((req.page-1) * 1)
+	.where('id', '=', id)
 	.then(function(journals){
 		journals.length && getJournalfromDropbox(user, journals[0], callback);
 		journals.length || callback(null, null);
@@ -31,6 +25,18 @@ journals.getCount = function(user, req, callback) {
 		callback(null, journals[0].count);
 	})
 	.catch(callback);
+};
+
+journals.getIds = function(user, req, callback) {
+	var date = req.date.toDate();
+	knex.select('id').from('journals')
+		.where('date_time', '>=', date.toDbString())
+		.andWhere('date_time', '<', date.next().toDbString())
+		.andWhere('user_id', '=', user.id)
+		.then(function(journals){
+			callback(null, journals.getArrayOf('id'));
+		})
+		.catch(callback);
 };
 
 journals.create = function(user, journal, callback){
@@ -92,7 +98,7 @@ var getJournalfromDropbox = function(user, journal, callback) {
 var addJournalToDropbox = function(user,journal,callback) {
 	var dropbox = new Dropbox(user.access_token);
 	var filePath = journal.filePath || filePathFrom(new Date(journal.dateTime));
-	dropbox.putFile(filePath, journal.journal, callback);
+	dropbox.putFile(filePath, journal.content, callback);
 };
 
 var addJournalToDb = function(journal ,callback) {

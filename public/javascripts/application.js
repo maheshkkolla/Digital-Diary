@@ -116,7 +116,7 @@ Ajax.prototype = {
 	setUrlParams: function(params) {
 		var self = this;
 		u.eachOnKeys(params, function(key) {
-			self.options.url.replace(key, params[key]);
+			self.options.url = self.options.url.replace(key, params[key]);
 		});
 		return this;
 	},

@@ -74,10 +74,15 @@ JournalCreationView.prototype = {
 		});
 	},
 
+	getDateTimePicker: function() {
+		return this.dateTimePicker;
+	},
+
 	createJournal: function(element, event) {
-		this.notifyCreatingJournal();
-		this.journalContent = this.journalTextbox.html();
 		var self = this;
+		self.notifyCreatingJournal();
+		self.journalContent = this.journalTextbox.html();
+		console.log(self.journalContent);
 		var journal = new Journal(null, this.dateTime, this.journalContent);
 		journal.save()
 		.done(function (status) {
@@ -133,6 +138,113 @@ JournalCreationView.prototype = {
 	}
 };
 
+var JournalsView = function() {
+	var self = this;
+	self.element = $("#journals");
+	self.date = u.newDateString();
+	self.ids = null;
+	self.journalViews = null;
+	self.dateTimePicker = null;
+	self.bindEvents();
+	self.fetchAndDisplay();
+};
+
+JournalsView.prototype = {
+	bindEvents: function() {
+
+	},
+
+	setDateTimePicker: function(dateTimePicker) {
+		var self = this;
+		self.dateTimePicker = dateTimePicker;
+		self.dateTimePicker.bindChange(function(e) {
+			self.date = new Date(e.date);
+			self.fetchAndDisplay();
+		});
+	},
+
+	fetchIds: function() {
+		return new Ajax({
+			url: "/journals/ids",
+			type: "GET"
+		}).setQueryParams({date: this.date}).call();
+	},
+
+	fetchAndDisplay: function() {
+		var self = this;
+		self.fetchIds().done(function(ids) {
+			self.ids = ids;
+			self.initializeJournals();
+		}).fail(function() {
+			self.notifyErrorLoadingJournals();
+		});
+	},
+
+	initializeJournals: function() {
+		var self = this;
+		self.journalViews = self.ids.map(function(id) {
+			var journalView =  new JournalView(self.element);
+			journalView.setId(id).fetchAndDisplay();
+			return journalView;
+		});
+	},
+
+	notifyErrorLoadingJournals: function() {
+		new Notification({
+			message: 'Error while loading journals',
+			autoClose: false,
+			type: 'failure'
+		}).notify();
+	}
+};
+
+var JournalView = function(journalsElement) {
+	this.id = null;
+	this.element = null;
+	this.container = journalsElement;
+};
+
+JournalView.prototype = {
+
+	setId: function(id) {
+		this.id = id;
+		return this;
+	},
+
+	fetchAndDisplay: function() {
+		var self = this;
+		self.fetch().done(function(response) {
+			self.element = $(response);
+			self.container.append(self.element);
+		}).fail(function() {
+			self.notifyFail();
+		});
+	},
+
+	fetch: function() {
+		var self = this;
+		return new Ajax({
+			url: "/journals/ID",
+			type: "GET"
+		}).setUrlParams({ID: self.id}).call();
+	},
+
+	notifyFail: function() {
+		new Notification({
+			message: 'Error while loading a journal',
+			autoClose: false,
+			type: 'failure'
+		}).notify();
+	}
+};
+
+
+
+
 $(function() {
-	new JournalCreationView();
+	var jCV = new JournalCreationView();
+	var dateTimePicker = jCV.getDateTimePicker();
+	var jV = new JournalsView();
+	jV.setDateTimePicker(dateTimePicker);
+
 });

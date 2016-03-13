@@ -158,8 +158,16 @@ JournalsView.prototype = {
 		var self = this;
 		self.dateTimePicker = dateTimePicker;
 		self.dateTimePicker.bindChange(function(e) {
+			self.removeAllJournals();
 			self.date = new Date(e.date);
 			self.fetchAndDisplay();
+		});
+	},
+
+	removeAllJournals: function() {
+		var self = this;
+		u.isNotNullOrUndefined(self.journalViews) && self.journalViews.forEach(function(journalView) {
+			journalView.remove();
 		});
 	},
 
@@ -235,6 +243,10 @@ JournalView.prototype = {
 			autoClose: false,
 			type: 'failure'
 		}).notify();
+	},
+
+	remove: function() {
+		this.element.remove();
 	}
 };
 

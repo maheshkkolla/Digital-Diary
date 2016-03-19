@@ -342,7 +342,13 @@ body {
     border: none;
 }
 
+.display {
+    display: block;
+}
 
+.hidden {
+    display: none;
+}
 
 
 

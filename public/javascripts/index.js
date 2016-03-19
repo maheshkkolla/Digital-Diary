@@ -144,16 +144,33 @@ var JournalsView = function() {
 	var self = this;
 	self.element = $("#journals");
 	self.date = u.newDateString();
-	self.ids = null;
+	self.ids = [];
 	self.journalViews = [];
 	self.dateTimePicker = null;
+	self.loader = $("#loader").clone();
+	self.element.after(self.loader);
+	self.loadingDfrd = $.Deferred();
 	self.bindEvents();
 	self.fetchAndDisplay();
 };
 
 JournalsView.prototype = {
 	bindEvents: function() {
+		var self = this;
+		$.when(self.loadingDfrd).done(function() {
+			if(self.ids.length == self.journalViews.length)
+				self.hideLoader();
+		});
+	},
 
+	showLoading: function() {
+		var self = this;
+		self.loader.removeClass('hidden');
+	},
+
+	hideLoader: function() {
+		var self = this;
+		self.loader.addClass('hidden');
 	},
 
 	setDateTimePicker: function(dateTimePicker) {
@@ -183,6 +200,7 @@ JournalsView.prototype = {
 
 	fetchAndDisplay: function() {
 		var self = this;
+		self.showLoading();
 		self.fetchIds().done(function(ids) {
 			self.ids = ids;
 			self.initializeJournals();
@@ -195,7 +213,7 @@ JournalsView.prototype = {
 		var self = this;
 		self.journalViews = self.ids.map(function(id) {
 			var journalView =  new JournalView(self.element);
-			journalView.setId(id).fetchAndDisplay();
+			journalView.setId(id).fetchAndDisplay(self.loadingDfrd);
 			return journalView;
 		});
 	},
@@ -295,15 +313,17 @@ JournalView.prototype = {
 		self.deleteBtn.popover('toggle');
 	},
 
-	fetchAndDisplay: function() {
+	fetchAndDisplay: function(doneDfrd) {
 		var self = this;
 		self.fetch().done(function(response) {
 			self.element = $(response);
 			self.initModel();
 			self.bindEvents();
 			self.container.append(self.element);
+			u.isNotNullOrUndefined(doneDfrd) && doneDfrd.resolve();
 		}).fail(function() {
 			self.notifyLoadingFail();
+			u.isNotNullOrUndefined(doneDfrd) && doneDfrd.resolve();
 		});
 	},
 

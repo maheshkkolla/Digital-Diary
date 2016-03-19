@@ -3,17 +3,6 @@ var Journal = function(id, dateTime, content) {
 	this.id = id;
 	this.dateTime = dateTime;
 	this.content = content;
-
-
-	Object.defineProperty(this, 'updateOptions', { value: {
-		url: '/journals/ID',
-		type: 'PUT'
-	}});
-
-	Object.defineProperty(this, 'createOptions', { value: {
-		url: '/journals',
-		type: 'POST'
-	}});
 };
 
 Journal.prototype = {
@@ -26,11 +15,24 @@ Journal.prototype = {
 	},
 
 	createNewJournal: function () {
-		return new Ajax(this.createOptions).setData(this.toJson()).call();
+		return new Ajax({
+			url: '/journals',
+			type: 'POST'
+		}).setData(this.toJson()).call();
 	},
 
 	updateTheJournal: function () {
-		return new Ajax(this.updateOptions).setData(this.toJson()).setUrlParams({ID: this.id}).call();
+		return new Ajax({
+			url: '/journals/ID',
+			type: 'PUT'
+		}).setData(this.toJson()).setUrlParams({ID: this.id}).call();
+	},
+
+	delete: function() {
+		return new Ajax({
+			url: '/journals/ID',
+			type: 'DELETE'
+		}).setUrlParams({ID: this.id}).call();
 	},
 
 	toJson: function() {
@@ -143,7 +145,7 @@ var JournalsView = function() {
 	self.element = $("#journals");
 	self.date = u.newDateString();
 	self.ids = null;
-	self.journalViews = null;
+	self.journalViews = [];
 	self.dateTimePicker = null;
 	self.bindEvents();
 	self.fetchAndDisplay();
@@ -169,6 +171,7 @@ JournalsView.prototype = {
 		u.isNotNullOrUndefined(self.journalViews) && self.journalViews.forEach(function(journalView) {
 			journalView.remove();
 		});
+		self.journalViews = [];
 	},
 
 	fetchIds: function() {
@@ -209,7 +212,12 @@ JournalsView.prototype = {
 var JournalView = function(journalsElement) {
 	this.id = null;
 	this.element = null;
+	this.model = null;
 	this.container = journalsElement;
+	this.deleteBtn = null;
+	this.editBtn = null;
+	this.deleteBtnYes = $("<button class='btn btn-default' name='deleteYes'>Yes</button>");
+	this.deleteBtnNo = $("<button class='btn btn-default' name='deleteNo'>No</button>");
 };
 
 JournalView.prototype = {
@@ -219,14 +227,91 @@ JournalView.prototype = {
 		return this;
 	},
 
+	bindEvents: function() {
+		var self = this;
+		self.deleteBtn = self.element.find("[name='delete']");
+		self.editBtn = self.element.find("[name='edit']");
+		self.initDeletePopover();
+
+		self.deleteBtn.click(function () {
+			self.triggerDeletePopover();
+		});
+
+		self.editBtn.click(function () {
+			//trigger edit modal
+		});
+
+		self.deleteBtnYes.click(function () {
+			self.deleteJournal();
+		});
+
+		self.deleteBtnNo.click(function() {
+			self.triggerDeletePopover();
+		});
+	},
+
+	deleteJournal: function() {
+		var self = this;
+		self.model.delete().done(function() {
+			self.notifyDeleteSuccess();
+			self.remove();
+		}).fail(function() {
+			self.notifyDeleteFailure();
+		});
+	},
+
+	notifyDeleteFailure: function() {
+		new Notification({
+			message: 'Error while deleting a journal. Try after sometime.',
+			autoClose: false,
+			type: 'failure'
+		}).notify();
+	},
+
+	notifyDeleteSuccess: function() {
+		new Notification({
+			message: 'Journal deleted successfully',
+			type: 'success'
+		}).notify();
+	},
+
+	initDeletePopover: function() {
+		var self = this;
+		self.deleteBtn.popover({
+			html: true,
+			trigger: 'manual',
+			placement: 'top',
+			container: 'body',
+			template: "<div class='popover' role='tooltip'> <div class='arrow'></div>"
+			+ "<div class='popover-title'> </div>"
+			+ "<div class='popover-content'></div></div>",
+			title: 'Are you sure ?',
+			content: self.deleteBtnYes.add(self.deleteBtnNo)
+		});
+	},
+
+	triggerDeletePopover: function() {
+		var self = this;
+		self.deleteBtn.popover('toggle');
+	},
+
 	fetchAndDisplay: function() {
 		var self = this;
 		self.fetch().done(function(response) {
 			self.element = $(response);
+			self.initModel();
+			self.bindEvents();
 			self.container.append(self.element);
 		}).fail(function() {
-			self.notifyFail();
+			self.notifyLoadingFail();
 		});
+	},
+
+	initModel: function() {
+		var self = this;
+		var dateTime = self.element.find(".date");
+		var content = self.element.find(".journalContent");
+		self.model = new Journal(self.id, dateTime, content);
 	},
 
 	fetch: function() {
@@ -237,7 +322,7 @@ JournalView.prototype = {
 		}).setUrlParams({ID: self.id}).call();
 	},
 
-	notifyFail: function() {
+	notifyLoadingFail: function() {
 		new Notification({
 			message: 'Error while loading a journal',
 			autoClose: false,
@@ -246,7 +331,9 @@ JournalView.prototype = {
 	},
 
 	remove: function() {
-		this.element.remove();
+		var self = this;
+		self.deleteBtn.popover('destroy');
+		self.element.remove();
 	}
 };
 
@@ -258,5 +345,4 @@ $(function() {
 	var dateTimePicker = jCV.getDateTimePicker();
 	var jV = new JournalsView();
 	jV.setDateTimePicker(dateTimePicker);
-
 });

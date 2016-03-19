@@ -36,9 +36,9 @@ router.get('/count', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-	journals.create(req.session.user,req.body, function(err, success) {
+	journals.create(req.session.user,req.body, function(err, createdId) {
 		if(err) next(err);
-		else res.send('OK');
+		else res.send(createdId.toString());
 	});
 
 });

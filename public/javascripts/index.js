@@ -94,12 +94,12 @@ JournalCreationView.prototype = {
 		});
 	},
 
-	handleCreationSuccess: function(status) {
+	handleCreationSuccess: function(id) {
 		this.closeCreatingNotification();
-		if(status.is("OK")) {
-			this.notifyCreationSuccess();
+		this.notifyCreationSuccess();
+		if(u.isNotNullOrUndefined(window.App) && u.isNotNullOrUndefined(window.App.journalsView)) {
+			window.App.journalsView.addJournalWithId(id);
 		}
-		else this.notifyCreationFailed();
 	},
 
 	handleCreationFailure: function() {
@@ -163,6 +163,12 @@ JournalsView.prototype = {
 		});
 	},
 
+	addJournalWithId: function(id) {
+		var self = this;
+		self.ids.push(id);
+		self.journalViews.push(self.initializeJournal(id));
+	},
+
 	showLoading: function() {
 		var self = this;
 		self.loader.removeClass('hidden');
@@ -212,10 +218,15 @@ JournalsView.prototype = {
 	initializeJournals: function() {
 		var self = this;
 		self.journalViews = self.ids.map(function(id) {
-			var journalView =  new JournalView(self.element);
-			journalView.setId(id).fetchAndDisplay(self.loadingDfrd);
-			return journalView;
+			self.initializeJournal(id);
 		});
+	},
+
+	initializeJournal: function(id) {
+		var self = this;
+		var journalView =  new JournalView(self.element);
+		journalView.setId(id).fetchAndDisplay(self.loadingDfrd);
+		return journalView;
 	},
 
 	notifyErrorLoadingJournals: function() {
@@ -361,8 +372,10 @@ JournalView.prototype = {
 
 
 $(function() {
-	var jCV = new JournalCreationView();
-	var dateTimePicker = jCV.getDateTimePicker();
-	var jV = new JournalsView();
-	jV.setDateTimePicker(dateTimePicker);
+	window.App = {};
+	var app = window.App;
+	app.creationView = new JournalCreationView();
+	var dateTimePicker = app.creationView.getDateTimePicker();
+	app.journalsView = new JournalsView();
+	app.journalsView.setDateTimePicker(dateTimePicker);
 });

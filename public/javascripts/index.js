@@ -47,15 +47,24 @@ Journal.prototype = {
 
 var JournalCreationView = function() {
 	var self = this;
-	self.element = $("#editor");
-	self.journalTextbox = $("#journal");
-	self.dateTime = u.newDateString();
-	self.dateTimeCalendar = new DateTimeCalendar(this.dateTime);
-	self.dateTimePicker = new DateTimePicker(this.dateTime);
+	self.initFields();
 	self.bindEvents();
 };
 
 JournalCreationView.prototype = {
+	initFields: function() {
+		var self = this;
+		self.element = $("#editor");
+		self.journalTextbox = $("#journal");
+		self.dateTime = u.newDateString();
+		self.dateTimeCalendar = new DateTimeCalendar(this.dateTime);
+		self.dateTimePicker = new DateTimePicker(this.dateTime);
+		self.locationSelector = {
+			element: $("#locationSelector")
+		};
+		self.locationSelector.input = self.locationSelector.element.find('.location')[0];
+		self.locationSelector.autoComplete = new google.maps.places.Autocomplete(self.locationSelector.input);
+	},
 
 	bindEvents: function() {
 		var self = this;
@@ -74,6 +83,22 @@ JournalCreationView.prototype = {
 				toolbar.show();
 			}
 		});
+
+		self.locationSelector.autoComplete.addListener('place_changed', function() {
+			self.locationChanged();
+		});
+	},
+
+	locationChanged: function() {
+		var self = this;
+		var place = self.locationSelector.autoComplete.getPlace();
+		var name = place.name;
+		var url = "http://www.google.com/maps?q=".concat(name.split(" ").join('+'));
+		self.locationSelector.element.find('a').attr('href', url);
+		//place.geometry.location.lat();
+		//place.geometry.location.lng();
+		//place.formatted_address
+		//place.formatted_phone_number
 	},
 
 	getDateTimePicker: function() {

@@ -324,22 +324,59 @@ body {
     border-bottom: 2px solid;
 }
 
-.actions .action{
+.actions .action {
     width: 20%;
     height: 100%;
     border-right: 2px solid;
     color: inherit;
     cursor: pointer;
+    float: left;
+    text-align: center;
+}
+
+.actions .action a {
+    color: inherit;
+    cursor: pointer;
+}
+
+.actions .action a:hover {
+    color: inherit;
+}
+
+.actions .action .actionContent {
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+}
+
+.actions .action .actionIcon {
+    font-size: 30px;
+}
+
+.actions .action .location {
+    border: none;
+    background: inherit;
+    font-size: 24px;
+    width: 85%;
+}
+
+.autoCursor {
+    cursor: auto !important;
+}
+
+.actions .action .location:hover {
+    outline: 0px !important;
 }
 
 .dateSelector {
     background-color: inherit;
+    font-size: inherit;
     color: inherit;
     height: 100%;
     display: block;
     width: 100%;
-    font-size: 30px;
     border: none;
+    padding: inherit;
 }
 
 .display {
@@ -349,7 +386,6 @@ body {
 .hidden {
     display: none;
 }
-
 
 
 

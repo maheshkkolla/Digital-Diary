@@ -347,6 +347,7 @@ body {
     top: 50%;
     position: relative;
     transform: translateY(-50%);
+    z-index: 4;
 }
 
 .actions .action .actionIcon {

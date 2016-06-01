@@ -1,8 +1,9 @@
 
-var Journal = function(id, dateTime, content) {
+var Journal = function(id, dateTime, content, location) {
 	this.id = id;
 	this.dateTime = dateTime;
 	this.content = content;
+	this.location = location;
 };
 
 Journal.prototype = {
@@ -39,7 +40,33 @@ Journal.prototype = {
 		return {
 			id: this.id,
 			dateTime: this.dateTime,
-			content: this.content
+			content: this.content,
+			location: this.location.toJson()
+		};
+	}
+};
+
+var Location = function(name, address, latitude, longitude, phoneNumber) {
+	this.name = name;
+	this.address = address;
+	this.latitude = latitude;
+	this.longitude = longitude;
+	this.phoneNumber = phoneNumber;
+};
+
+Location.prototype = {
+	getAddressWithName: function() {
+		return(this.name.concatWithSpace(this.address));
+	},
+
+	toJson: function() {
+		if(u.isNullOrUndefined(this.name)) return null;
+		return {
+			name: this.name,
+			address: this.address,
+			latitude: this.latitude,
+			longitude: this.longitude,
+			phoneNumber: this.phoneNumber
 		};
 	}
 };
@@ -59,6 +86,7 @@ JournalCreationView.prototype = {
 		self.dateTime = u.newDateString();
 		self.dateTimeCalendar = new DateTimeCalendar(this.dateTime);
 		self.dateTimePicker = new DateTimePicker(this.dateTime);
+		self.location = new Location();
 		self.locationSelector = {
 			element: $("#locationSelector")
 		};
@@ -92,13 +120,16 @@ JournalCreationView.prototype = {
 	locationChanged: function() {
 		var self = this;
 		var place = self.locationSelector.autoComplete.getPlace();
-		var name = place.name;
-		var url = "http://www.google.com/maps?q=".concat(name.split(" ").join('+'));
+		self.location = new Location(
+			place.name,
+			place.formatted_address,
+			place.geometry.location.lat(),
+			place.geometry.location.lng(),
+			place.formatted_phone_number
+		);
+		var addressWithName = self.location.getAddressWithName();
+		var url = "http://www.google.com/maps?q=".concat(addressWithName.split(" ").join('+'));
 		self.locationSelector.element.find('a').attr('href', url);
-		//place.geometry.location.lat();
-		//place.geometry.location.lng();
-		//place.formatted_address
-		//place.formatted_phone_number
 	},
 
 	getDateTimePicker: function() {
@@ -109,8 +140,7 @@ JournalCreationView.prototype = {
 		var self = this;
 		self.notifyCreatingJournal();
 		self.journalContent = this.journalTextbox.html();
-		console.log(self.journalContent);
-		var journal = new Journal(null, this.dateTime, this.journalContent);
+		var journal = new Journal(null, self.dateTime, self.journalContent, self.location);
 		journal.save()
 		.done(function (status) {
 			self.handleCreationSuccess(status);

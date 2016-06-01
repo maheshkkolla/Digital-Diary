@@ -101,7 +101,8 @@ Ajax.prototype = {
 	},
 
 	setData: function(data) {
-		this.options.data = data;
+		this.options.contentType = 'application/json';
+		this.options.data = JSON.stringify(data);
 		return this;
 	},
 

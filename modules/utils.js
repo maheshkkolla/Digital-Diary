@@ -23,3 +23,24 @@ Array.prototype.getArrayOf = function(key) {
         return obj[key];
     });
 };
+
+//Common Utils
+var Utils = function () {
+
+};
+
+Utils.prototype = {
+
+    isNullOrUndefined: function (variable) {
+        return (this.isUndefined(variable) || this.isNull(variable));
+    },
+
+    isUndefined: function (variable) {
+        return (variable == undefined);
+    },
+
+    isNull: function (variable) {
+        return (variable == null);
+    }
+};
+module.exports =  new Utils();

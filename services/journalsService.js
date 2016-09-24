@@ -1,4 +1,4 @@
-var journalsModule = require('../modules/journals');
+var journalsModule = require('../modules/journalsModule');
 var locationsSerive = require('./locationsService');
 var dropboxService = require('./dropboxService');
 var service = {};

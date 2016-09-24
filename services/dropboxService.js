@@ -1,4 +1,4 @@
-var Dropbox = require('../modules/dropbox');
+var Dropbox = require('../modules/dropboxModule');
 var service = {};
 module.exports = service;
 

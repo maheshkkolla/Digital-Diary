@@ -13,10 +13,9 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var journals = require('./routes/journals');
 var contact = require('./routes/contact');
-var usersModule  = require('./modules/users');
+var usersModule  = require('./modules/usersModule');
 
 var app = express();
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var journals = require('../modules/journals');
+var journals = require('../modules/journalsModule');
 var service = require('../services/journalsService');
 
 router.get('/', function(req, res, next) {

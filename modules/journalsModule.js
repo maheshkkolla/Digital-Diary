@@ -1,6 +1,6 @@
 var config = require('../config');
 var knex = require('knex')(config.db);
-var Dropbox = require('./dropbox'); 
+var Dropbox = require('./dropboxModule');
 var journals = {};
 module.exports = journals;
 

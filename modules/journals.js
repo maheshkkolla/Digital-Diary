@@ -1,5 +1,4 @@
-var u = require('./utils');
-var config = require('../config')
+var config = require('../config');
 var knex = require('knex')(config.db);
 var Dropbox = require('./dropbox'); 
 var journals = {};
@@ -39,13 +38,13 @@ journals.getIds = function(user, req, callback) {
 		.catch(callback);
 };
 
-journals.create = function(user, journal, callback){
-	addJournalToDropbox(user, journal, function(err, body) {
-		if(err) callback(err, null);
-		else{
-			var journalMetaData = { userId: user.id, filePath: body.path, dateTime: journal.dateTime, location: journal.location};
-			addJournalToDb(journalMetaData, callback);
-		}
+journals.create = function(user, journal) {
+	return knex('journals').returning('id').insert({
+		user_id: user.id,
+		file_path: journal.filePath,
+		date_time: new Date(journal.dateTime),
+		create_at: 'now()',
+		location_id: journal.locationId
 	});
 };
 
@@ -95,28 +94,10 @@ var getJournalfromDropbox = function(user, journal, callback) {
 	});
 };
 
-var addJournalToDropbox = function(user,journal,callback) {
+var addJournalToDropbox = function(user, journal, callback) {
 	var dropbox = new Dropbox(user.access_token);
 	var filePath = journal.filePath || filePathFrom(new Date(journal.dateTime));
 	dropbox.putFile(filePath, journal.content, callback);
-};
-
-var addJournalToDb = function(journal ,callback) {
-	knex('journals').returning('id')
-	.insert({user_id: journal.userId, file_path: journal.filePath, date_time: new Date(journal.dateTime), create_at: 'now()'})
-	.then(function(createdIds) {
-		if(u.isNullOrUndefined(journal.location)) callback(null, createdIds[0]);
-		else saveJournalLocation(createdIds[0], journal.location, callback);
-	}).catch(callback);
-};
-
-var saveJournalLocation = function(journalId, location, callback) {
-	knex('locations')
-	.insert({journal_id: journalId, name: location.name, latitude: location.latitude,
-		longitude: location.longitude, address: location.address, phone_no: location.phoneNumber})
-	.then(function() {
-		callback(null, journalId);
-	}).catch(callback);
 };
 
 var filePathFrom = function(date) {

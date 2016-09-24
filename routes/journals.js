@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var journals = require('../modules/journals');
+var service = require('../services/journalsService');
 
 router.get('/', function(req, res, next) {
   	res.render('journals');
@@ -36,11 +37,12 @@ router.get('/count', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-	journals.create(req.session.user, req.body, function(err, createdId) {
-		if(err) next(err);
-		else res.send(createdId.toString());
+	service.createJournal(req.session.user, req.body)
+	.then(function(createdIds) {
+		res.send(createdIds.journalId.toString());
+	}).catch(function(err) {
+		next(err);
 	});
-
 });
 
 router.delete('/:id', function(req, res, next) {

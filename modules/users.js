@@ -12,7 +12,7 @@ users.getById = function(id, callback) {
 		else callback(null, null);
 	})
 	.catch(callback);
-}
+};
 
 users.create = function(user, callback) {
 	var self = this;
@@ -33,4 +33,4 @@ users.findOrCreate = function(user, callback) {
 			dbUser || self.create(user, callback);
 		}	
 	})
-}
+};

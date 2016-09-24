@@ -11,6 +11,9 @@ var config = {
     		putFile: "https://content.dropboxapi.com/1/files_put/auto/@PATH@",
     		getFile: "https://content.dropboxapi.com/1/files/auto/@PATH@",
     		deleteFile: "https://api.dropboxapi.com/1/fileops/delete"
+		},
+		libs: {
+			dropboxOauthStrategy: './mocks/dropboxStrategy'
 		}
 	},
 	qa: {
@@ -30,9 +33,12 @@ var config = {
     		putFile: "https://content.dropboxapi.com/1/files_put/auto/@PATH@",
     		getFile: "https://content.dropboxapi.com/1/files/auto/@PATH@",
     		deleteFile: "https://api.dropboxapi.com/1/fileops/delete"
+		},
+		libs: {
+			dropboxOauthStrategy: 'passport-dropbox-oauth2'
 		}
 	}
-}
+};
 
 if(process.env.ENV == 'qa') module.exports = config.qa;
 else module.exports = config.dev;

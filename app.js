@@ -6,14 +6,14 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
-var DropboxOAuth2Strategy = require('passport-dropbox-oauth2').Strategy;
+var config = require('./config');
+var DropboxOAuth2Strategy = require(config.libs.dropboxOauthStrategy).Strategy;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var journals = require('./routes/journals');
 var contact = require('./routes/contact');
 var usersModule  = require('./modules/users');
-var config = require('./config');
 
 var app = express();
 
@@ -60,11 +60,11 @@ passport.use(new DropboxOAuth2Strategy({
 ));
 
 passport.serializeUser(function (user, done) {
-    done(null, user);
+    done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
-    done(null, {id: id});
+    usersModule.getById(id, done);
 });
 
 var isAuthenticated = function(req, res, sucess) {

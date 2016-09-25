@@ -19,5 +19,8 @@ cd public
  ./node_modules/bower/bin/bower install
 cd ..
 
+echo "************ COMPILING CLIENT TEMPLATES ************"
+./node_modules/clientjade/bin/clientjade ./views/client/ > ./public/javascripts/bin/templates.js
+
 echo "************ STARTING THE SERVER ************"
 node ./bin/www

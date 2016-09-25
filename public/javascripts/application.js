@@ -1,3 +1,10 @@
+$(function() {
+	jade.render = function(node, template, data) {
+		node.html(jade.templates[template](data));
+	}
+});
+
+
 var Notification = function(arg) {
 	this.options = {};
 	if(u.isType(arg, 'object')) this.options = arg;

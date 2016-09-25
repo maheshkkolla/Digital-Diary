@@ -3,7 +3,7 @@ var DateTimePicker = function(date) {
         maxDate: new Date(),
         defaultDate: new Date(date),
         sideBySide: true
-    })
+    });
 };
 
 DateTimePicker.prototype = {

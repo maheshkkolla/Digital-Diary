@@ -87,8 +87,11 @@ JournalCreationView.prototype = {
 		self.journalTextbox = $("#journal");
 		self.titleTextbox = $("#title");
 		self.dateTime = u.newDateString();
-		//self.dateTimeCalendar = new DateTimeCalendar(this.dateTime);
+		self.detailElements = {};
+		self.detailElements.dateTime = self.element.find('.journalDetails .dateTime');
+		self.detailElements.location = self.element.find('.journalDetails .location');
 		self.dateTimePicker = new DateTimePicker(this.dateTime);
+		self.dateChanged();
 		self.location = new Location();
 		self.locationSelector = {
 			element: $("#locationSelector")
@@ -101,7 +104,8 @@ JournalCreationView.prototype = {
 		var self = this;
 		var page = $(document);
 		self.dateTimePicker.bindChange(function(e) {
-			self.dateChanged(e);
+			self.dateTime = new Date(e.date);
+			self.dateChanged();
 		});
 		page.on("click", "#saveJournal", function(e) {
 			self.createJournal($(this), e);
@@ -133,6 +137,7 @@ JournalCreationView.prototype = {
 		var addressWithName = self.location.getAddressWithName();
 		var url = "http://www.google.com/maps?q=".concat(addressWithName.split(" ").join('+'));
 		self.locationSelector.element.find('a').attr('href', url);
+		self.detailElements.location.html(self.location.name);
 	},
 
 	getDateTimePicker: function() {
@@ -193,9 +198,8 @@ JournalCreationView.prototype = {
 		this.creating.close();
 	},
 
-	dateChanged: function(e) {
-		this.dateTime = new Date(e.date);
-		//this.dateTimeCalendar.set(this.dateTime);
+	dateChanged: function() {
+		this.detailElements.dateTime.html(this.dateTime.toString().slice(0,21));
 	}
 };
 

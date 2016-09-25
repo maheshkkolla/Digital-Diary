@@ -386,7 +386,8 @@ JournalView.prototype = {
 	fetchAndDisplay: function(doneDfrd) {
 		var self = this;
 		self.fetch().done(function(response) {
-			self.element = jade.append(self.container, 'journal', response);
+			self.element = $(jade.templates['journal'](response));
+			self.container.append(self.element);
 			self.initModel(response);
 			self.bindEvents();
 			u.isNotNullOrUndefined(doneDfrd) && doneDfrd.resolve();
@@ -397,7 +398,7 @@ JournalView.prototype = {
 	},
 
 	initModel: function(journalData) {
-		self.model = new Journal(this.id, journalData.title,
+		this.model = new Journal(this.id, journalData.title,
 			journalData.date_time, journalData.content);
 	},
 

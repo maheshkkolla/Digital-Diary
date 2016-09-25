@@ -6,8 +6,9 @@ div()
      span(class='glyphicon glyphicon-pencil bodyColor')
     button(class='btn btn-default' name='delete')
      span(class='glyphicon glyphicon-trash text-danger')
-   br 
-   div(class='date') #{journal.date_time}
-   div(class='journalContent')!= journal.content
+   br
+   div(class='title') #{title}
+   div(class='date') #{date_time}
+   div(class='journalContent')!= content
  - else
   div(class='text-center lead') No journals available

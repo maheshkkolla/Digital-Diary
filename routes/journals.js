@@ -18,7 +18,7 @@ router.get("/:id", function(req, res, next) {
 	var id = req.params.id;
 	journals.getJournal(req.session.user, id, function(err, journal) {
 		if(err) next(err);
-		else res.render('_journal', {journal: journal, layout: false});
+		else res.json(journal);
 	});
 });
 

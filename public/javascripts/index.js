@@ -386,10 +386,9 @@ JournalView.prototype = {
 	fetchAndDisplay: function(doneDfrd) {
 		var self = this;
 		self.fetch().done(function(response) {
-			self.element = $(response);
-			self.initModel();
+			self.element = jade.append(self.container, 'journal', response);
+			self.initModel(response);
 			self.bindEvents();
-			self.container.append(self.element);
 			u.isNotNullOrUndefined(doneDfrd) && doneDfrd.resolve();
 		}).fail(function() {
 			self.notifyLoadingFail();
@@ -397,11 +396,9 @@ JournalView.prototype = {
 		});
 	},
 
-	initModel: function() {
-		var self = this;
-		var dateTime = self.element.find(".date");
-		var content = self.element.find(".journalContent");
-		self.model = new Journal(self.id, null, dateTime, content);
+	initModel: function(journalData) {
+		self.model = new Journal(this.id, journalData.title,
+			journalData.date_time, journalData.content);
 	},
 
 	fetch: function() {

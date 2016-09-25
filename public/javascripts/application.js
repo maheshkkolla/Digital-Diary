@@ -1,7 +1,5 @@
 $(function() {
-	jade.render = function(node, template, data) {
-		node.html(jade.templates[template](data));
-	}
+
 });
 
 

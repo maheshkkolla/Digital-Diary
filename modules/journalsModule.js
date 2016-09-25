@@ -1,3 +1,4 @@
+var u = require('./utils');
 var config = require('../config');
 var knex = require('knex')(config.db);
 var Dropbox = require('./dropboxModule');

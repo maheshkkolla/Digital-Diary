@@ -16,8 +16,10 @@ block content
                 include _showDateTimeCalendar
             div(class='col-md-10')
                 div(class='myToolbar')
-                div(id='journal' class='journalContent tinymceCustomBody')
-                button(class="btn btn-primary pull-right" id='saveJournal') Save Journal
+                div(class='journalCreationContainer')
+                 input(type='text' placeholder="Title ..." id='title')
+                 div(id='journal' class='journalContent tinymceCustomBody')
+                 button(class="btn btn-primary pull-right" id='saveJournal') Save Journal
         div(class="content container")
             h4 Today's Journals
             div(id="journals" class="journals")

@@ -156,6 +156,9 @@ body {
 	background-color: #FFF !important;
     padding:10px;
     min-height: 200px;
+}
+
+.journalCreationContainer {
     margin-top: 73px; /* height of the tinymce toolbar + editor border */
 }
 

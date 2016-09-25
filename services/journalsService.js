@@ -9,7 +9,9 @@ service.createJournal = function(user, journal) {
     return dropboxService.storeJournalContent(user, journal)
     .then(function(dropboxRes) {
         result.filePath = dropboxRes.path;
-        return locationsSerive.findOrCreate(journal.location);
+        if(journal.location)
+            return locationsSerive.findOrCreate(journal.location);
+        return Promise.resolve(null);
     }).then(function(locationId) {
         delete journal.location;
         journal.filePath = result.filePath;

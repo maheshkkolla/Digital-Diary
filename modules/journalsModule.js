@@ -41,6 +41,7 @@ journals.getIds = function(user, req, callback) {
 journals.create = function(user, journal) {
 	return knex('journals').returning('id').insert({
 		user_id: user.id,
+		title: journal.title,
 		file_path: journal.filePath,
 		date_time: new Date(journal.dateTime),
 		create_at: 'now()',

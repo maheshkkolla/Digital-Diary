@@ -1,6 +1,7 @@
 
-var Journal = function(id, dateTime, content, location) {
+var Journal = function(id, title, dateTime, content, location) {
 	this.id = id;
+	this.title = title;
 	this.dateTime = dateTime;
 	this.content = content;
 	this.location = location;
@@ -39,6 +40,7 @@ Journal.prototype = {
 	toJson: function() {
 		return {
 			id: this.id,
+			title: this.title,
 			dateTime: this.dateTime,
 			content: this.content,
 			location: this.location.toJson()
@@ -83,6 +85,7 @@ JournalCreationView.prototype = {
 		var self = this;
 		self.element = $("#editor");
 		self.journalTextbox = $("#journal");
+		self.titleTextbox = $("#title");
 		self.dateTime = u.newDateString();
 		self.dateTimeCalendar = new DateTimeCalendar(this.dateTime);
 		self.dateTimePicker = new DateTimePicker(this.dateTime);
@@ -139,8 +142,9 @@ JournalCreationView.prototype = {
 	createJournal: function(element, event) {
 		var self = this;
 		self.notifyCreatingJournal();
-		self.journalContent = this.journalTextbox.html();
-		var journal = new Journal(null, self.dateTime, self.journalContent, self.location);
+		self.journalContent = self.journalTextbox.html();
+		self.title = self.titleTextbox.val();
+		var journal = new Journal(null, self.title, self.dateTime, self.journalContent, self.location);
 		journal.save()
 		.done(function (status) {
 			self.handleCreationSuccess(status);
@@ -397,7 +401,7 @@ JournalView.prototype = {
 		var self = this;
 		var dateTime = self.element.find(".date");
 		var content = self.element.find(".journalContent");
-		self.model = new Journal(self.id, dateTime, content);
+		self.model = new Journal(self.id, null, dateTime, content);
 	},
 
 	fetch: function() {

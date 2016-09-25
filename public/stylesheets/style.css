@@ -156,9 +156,6 @@ body {
 	background-color: #FFF !important;
     padding:10px;
     min-height: 200px;
-}
-
-.journalCreationContainer {
     margin-top: 73px; /* height of the tinymce toolbar + editor border */
 }
 
@@ -306,10 +303,8 @@ body {
 
 #mceu_19 {
     z-index: 3 !important;
-    width: 99% !important;
+    width: 70% !important;
     overflow: scroll;
-    left: 0px !important;
-    top: 0px !important;
 }
 
 #mceu_19.mce-fixed {

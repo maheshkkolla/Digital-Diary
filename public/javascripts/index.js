@@ -87,7 +87,7 @@ JournalCreationView.prototype = {
 		self.journalTextbox = $("#journal");
 		self.titleTextbox = $("#title");
 		self.dateTime = u.newDateString();
-		self.dateTimeCalendar = new DateTimeCalendar(this.dateTime);
+		//self.dateTimeCalendar = new DateTimeCalendar(this.dateTime);
 		self.dateTimePicker = new DateTimePicker(this.dateTime);
 		self.location = new Location();
 		self.locationSelector = {
@@ -195,7 +195,7 @@ JournalCreationView.prototype = {
 
 	dateChanged: function(e) {
 		this.dateTime = new Date(e.date);
-		this.dateTimeCalendar.set(this.dateTime);
+		//this.dateTimeCalendar.set(this.dateTime);
 	}
 };
 
@@ -424,9 +424,6 @@ JournalView.prototype = {
 		self.element.remove();
 	}
 };
-
-
-
 
 $(function() {
 	window.App = {};

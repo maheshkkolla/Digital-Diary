@@ -12,14 +12,10 @@ block content
                     include _dateTimePicker
                 div(class="action autoCursor" id="locationSelector")
                     include _locationSelector
-            div(class="col-md-2")
-                include _showDateTimeCalendar
-            div(class='col-md-10')
-                div(class='myToolbar')
-                div(class='journalCreationContainer')
-                 input(type='text' placeholder="Title ..." id='title')
-                 div(id='journal' class='journalContent tinymceCustomBody')
-                 button(class="btn btn-primary pull-right" id='saveJournal') Save Journal
+            div(class='myToolbar')
+            input(type='text' placeholder="Title ..." id='title')
+            div(id='journal' class='journalContent tinymceCustomBody')
+            button(class="btn btn-primary pull-right" id='saveJournal') Save Journal
         div(class="content container")
             h4 Today's Journals
             div(id="journals" class="journals")

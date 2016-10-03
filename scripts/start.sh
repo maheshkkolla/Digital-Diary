@@ -4,8 +4,9 @@ set -e
 echo "************ INSTALLING DEPENDENCIES ************"
 npm install
 echo "************ RUNNING MIGRATIONS FOR ************"
-echo $ENV
+[ -z $ENV ] && ENV=dev
 
+echo $ENV
 ./node_modules/db-migrate/bin/db-migrate up -e $ENV
 
 echo "************ GO TO PUBLIC DIRECTORY ************"

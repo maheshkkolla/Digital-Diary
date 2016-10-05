@@ -9,6 +9,11 @@ service.storeJournalContent = function(user, journal) {
     return dropbox.putFile(filePath, journal.content);
 };
 
+service.deleteJournalContent = function(user, filePath) {
+    var dropbox = new Dropbox(user.access_token);
+    return dropbox.deleteFile(filePath);
+};
+
 var filePathFrom = function(date) {
     var path = '/' + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate() + "/";
     var fileName = new Buffer(new Date().toString()).toString('base64');

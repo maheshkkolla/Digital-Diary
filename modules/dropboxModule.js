@@ -34,13 +34,16 @@ Dropbox.prototype = {
 			else callback(null, body);
 		});	
 	},
-	deleteFile: function(filePath, callback) {
+	deleteFile: function(filePath) {
 		var accessToken = this.accessToken;
-		this.options.url = config.dropbox.deleteFile;
-		this.options.url += "?"+qs.stringify({'access_token': accessToken, path: filePath, root: 'auto'});
-		request.post(this.options, function(err, res, body){
-			if(err || body.error) callback(err || body.error, null);
-			else callback(null, body);
+		var self = this;
+		self.options.url = config.dropbox.deleteFile;
+		self.options.url += "?"+qs.stringify({'access_token': accessToken, path: filePath, root: 'auto'});
+		return new Promise(function(resolve, reject) {
+			request.post(self.options, function(err, res, body){
+				if(err || body.error) return reject(err || body.error);
+				return resolve(body);
+			});
 		});
 	}
 };

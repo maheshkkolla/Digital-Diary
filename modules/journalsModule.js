@@ -50,15 +50,6 @@ journals.create = function(user, journal) {
 	});
 };
 
-journals.deleteBy = function(user, id, callback) {
-	knex.select('file_path').from('journals').where('id', id).then(function(journals) {
-		deleteFromDropBox(user, journals[0].file_path, function(err, deleted) {
-			if(err) callback(err, null);
-			else deleteJournalRow(id, callback);
-		});
-	}).catch(callback)
-};
-
 journals.edit = function(user, data, callback) {
 	knex.select('file_path').from('journals').where('id', data.id).then(function(journals) {
 		if(journals.length > 0) {
@@ -72,17 +63,17 @@ journals.edit = function(user, data, callback) {
 	}).catch(callback);
 };
 
-var deleteJournalRow = function(id, callback) {
-	knex('journals')
-	.where('id', id)
-	.del().then(function(deletedRow) { 
-		callback(null, deletedRow)
-	}).catch(callback);
+journals.getFilePathBy = function(id) {
+	return knex.select('file_path').from('journals').where('id', id)
+	.then(function(journals) {
+		return Promise.resolve(journals[0].file_path)
+	});
 };
 
-var deleteFromDropBox = function(user, path, callback) {
-	var dropbox = new Dropbox(user.access_token);
-	dropbox.deleteFile(path, callback);
+journals.deleteJournal = function(id) {
+	return knex('journals')
+	.where('id', id)
+	.del();
 };
 
 var getJournalfromDropbox = function(user, journal, callback) {

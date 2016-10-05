@@ -47,9 +47,11 @@ router.post('/', function(req, res, next) {
 
 router.delete('/:id', function(req, res, next) {
 	var id = req.params.id;
-	journals.deleteBy(req.session.user, id, function(err, status) {
-		if(err) next(err);
-		else res.send('OK');
+	service.deleteBy(req.session.user, id)
+	.then(function(status) {
+		res.send('OK');
+	}).catch(function(err) {
+		next(err);
 	});
 });
 

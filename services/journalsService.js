@@ -23,3 +23,12 @@ service.createJournal = function(user, journal) {
         return Promise.resolve(result);
     });
 };
+
+service.deleteBy = function(user, id) {
+    return journalsModule.getFilePathBy(id)
+    .then(function(filePath) {
+        return dropboxService.deleteJournalContent(user, filePath);
+    }).then(function(dropboxSuccess) {
+        return journalsModule.deleteJournal(id);
+    });
+};

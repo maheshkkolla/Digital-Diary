@@ -325,6 +325,10 @@ body {
     background-color: #FFFFFF;
 }
 
+.mce-primary {
+    background-color: #2d8ac7 !important;
+}
+
 #mceu_19.mce-fixed {
     top: 70px !important;
     width: 74% !important;

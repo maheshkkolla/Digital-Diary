@@ -13,7 +13,7 @@ $(function(){
 	    statusbar: false,
 		setup: function (editor) {
 			editor.on('blur', function() {
-				return false;
+				return false; //Do not hide the toolbar on focus out
 			});
 
 			editor.on('focus', function() {

@@ -26,13 +26,16 @@ Dropbox.prototype = {
 	},
 	getFile: function(filePath, callback) {
 		var accessToken = this.accessToken;
-		this.options.url = config.dropbox.getFile.replace(/@PATH@/g, filePath);
-		this.options.url += "?"+qs.stringify({'access_token': accessToken});
-		request.get(this.options.url, function(err, res, body) {
-			if(res.statusCode == 404) body = 'File has deleted from Dropbox';
-			if(err || body.error) callback(err || body.error, null);
-			else callback(null, body);
-		});	
+		var self = this;
+		self.options.url = config.dropbox.getFile.replace(/@PATH@/g, filePath);
+		self.options.url += "?"+qs.stringify({'access_token': accessToken});
+		return new Promise(function(resolve, reject) {
+			request.get(self.options.url, function(err, res, body) {
+				if(res.statusCode == 404) return resolve('File has deleted from Dropbox');
+				if(err || body.error) return reject(err || body.error);
+				return resolve(body);
+			});
+		});
 	},
 	deleteFile: function(filePath) {
 		var accessToken = this.accessToken;

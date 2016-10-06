@@ -32,3 +32,15 @@ service.deleteBy = function(user, id) {
         return journalsModule.deleteJournal(id);
     });
 };
+
+service.getJournal = function(user, id) {
+    var journal = null;
+    return journalsModule.getJournal(id)
+    .then(function(journalDetails) {
+       journal = journalDetails;
+        return dropboxService.getJournalContent(user, journalDetails.file_path)
+    }).then(function(content) {
+        journal.content = content;
+        return Promise.resolve(journal);
+    });
+};

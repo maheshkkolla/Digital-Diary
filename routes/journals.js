@@ -16,9 +16,11 @@ router.get("/ids", function(req, res, next) {
 
 router.get("/:id", function(req, res, next) {
 	var id = req.params.id;
-	journals.getJournal(req.session.user, id, function(err, journal) {
-		if(err) next(err);
-		else res.json(journal);
+	service.getJournal(req.session.user, id)
+	.then(function(journal) {
+		res.json(journal);
+	}).catch(function(err) {
+		next(err);
 	});
 });
 

@@ -14,6 +14,11 @@ service.deleteJournalContent = function(user, filePath) {
     return dropbox.deleteFile(filePath);
 };
 
+service.getJournalContent = function(user, filePath) {
+    var dropbox = new Dropbox(user.access_token);
+    return dropbox.getFile(filePath);
+};
+
 var filePathFrom = function(date) {
     var path = '/' + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate() + "/";
     var fileName = new Buffer(new Date().toString()).toString('base64');

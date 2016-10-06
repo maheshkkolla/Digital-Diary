@@ -5,14 +5,12 @@ var Dropbox = require('./dropboxModule');
 var journals = {};
 module.exports = journals;
 
-journals.getJournal = function(user, id, callback) {
-	knex('journals')
+journals.getJournal = function(id) {
+	return knex('journals')
 	.where('id', '=', id)
 	.then(function(journals){
-		journals.length && getJournalfromDropbox(user, journals[0], callback);
-		journals.length || callback(null, null);
-	})
-	.catch(callback);
+		return Promise.resolve(journals[0]);
+	});
 };
 
 journals.getCount = function(user, req, callback) {
@@ -74,17 +72,6 @@ journals.deleteJournal = function(id) {
 	return knex('journals')
 	.where('id', id)
 	.del();
-};
-
-var getJournalfromDropbox = function(user, journal, callback) {
-	var dropbox = new Dropbox(user.access_token);
-	dropbox.getFile(journal.file_path, function(err, journalContent){
-		if(err) callback(err, null);
-		else {
-			journal.content = journalContent;
-			callback(null, journal);
-		}
-	});
 };
 
 var addJournalToDropbox = function(user, journal, callback) {

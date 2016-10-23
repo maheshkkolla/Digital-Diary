@@ -83,6 +83,7 @@ var JournalCreationView = function() {
 JournalCreationView.prototype = {
 	initFields: function() {
 		var self = this;
+		self.id = null;
 		self.element = $("#editor");
 		self.journalTextbox = $("#journal");
 		self.titleTextbox = $("#title");
@@ -124,6 +125,14 @@ JournalCreationView.prototype = {
 		});
 	},
 
+	populateInputs: function(options) {
+		var self = this;
+		self.id = options.id || null;
+		self.titleTextbox.val(options.title || '');
+		self.journalTextbox.html(options.content || '');
+		self.dateTimePicker.change(options.dateTime || u.newDateString());
+	},
+
 	locationChanged: function() {
 		var self = this;
 		var place = self.locationSelector.autoComplete.getPlace();
@@ -149,7 +158,7 @@ JournalCreationView.prototype = {
 		self.notifyCreatingJournal();
 		self.journalContent = self.journalTextbox.html();
 		self.title = self.titleTextbox.val();
-		var journal = new Journal(null, self.title, self.dateTime, self.journalContent, self.location);
+		var journal = new Journal(self.id, self.title, self.dateTime, self.journalContent, self.location);
 		journal.save()
 		.done(function (status) {
 			self.handleCreationSuccess(status);
@@ -164,6 +173,7 @@ JournalCreationView.prototype = {
 		if(u.isNotNullOrUndefined(window.App) && u.isNotNullOrUndefined(window.App.journalsView)) {
 			window.App.journalsView.addJournalWithId(id);
 		}
+		this.populateInputs({});
 	},
 
 	handleCreationFailure: function() {
@@ -330,7 +340,7 @@ JournalView.prototype = {
 		});
 
 		self.editBtn.click(function () {
-			//trigger edit modal
+			window.App.creationView.populateInputs(self.model);
 		});
 
 		self.deleteBtnYes.click(function () {

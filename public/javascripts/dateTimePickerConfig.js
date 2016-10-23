@@ -9,5 +9,9 @@ var DateTimePicker = function(date) {
 DateTimePicker.prototype = {
     bindChange: function(callback) {
         this.element.bind('dp.change', callback);
+    },
+
+    change: function(dateTime) {
+        this.element.data('DateTimePicker').date(dateTime);
     }
 };

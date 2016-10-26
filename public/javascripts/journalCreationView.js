@@ -36,6 +36,9 @@ JournalCreationView.prototype = {
         page.on("click", "#saveJournal", function(e) {
             self.createJournal($(this), e);
         });
+        page.on("click", "#clearAll", function(e) {
+            self.populateInputs({});
+        });
         page.scroll(function() {
             var toolbar = $("#mceu_19");
             if(page.scrollTop() >= (self.element[0].scrollHeight - 100)) {
@@ -83,6 +86,7 @@ JournalCreationView.prototype = {
         self.notifyCreatingJournal();
         self.journalContent = self.journalTextbox.html();
         self.title = self.titleTextbox.val();
+        self.dateTime = self.dateTimePicker.dateStr();
         var journal = new Journal(self.id, self.title, self.dateTime, self.journalContent, self.location);
         journal.save()
             .done(function (status) {

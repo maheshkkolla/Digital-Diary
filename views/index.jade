@@ -16,7 +16,10 @@ block content
             include _journalDetails
             div(id='journal' class='journalContent tinymceCustomBody')
             div(class='editorFooter')
-                button(class="btn btn-primary pull-right" id='saveJournal') Save Journal
+                div.pull-right
+                    button(class="btn btn-primary" id='clearAll') Clear All
+                    &emsp;
+                    button(class="btn btn-primary" id='saveJournal') Save Journal
                 div.clearfix
         div(class="content container")
             h4 Today's Journals

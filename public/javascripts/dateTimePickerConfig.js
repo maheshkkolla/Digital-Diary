@@ -13,5 +13,9 @@ DateTimePicker.prototype = {
 
     change: function(dateTime) {
         this.element.data('DateTimePicker').date(dateTime);
+    },
+
+    dateStr: function() {
+        return this.element.data('DateTimePicker').date()._d.toString();
     }
 };

@@ -17,7 +17,7 @@ cd public
  then
   HOME=$OPENSHIFT_DATA_DIR
  fi
- ./node_modules/bower/bin/bower install
+# ./node_modules/bower/bin/bower install
 cd ..
 
 echo "************ COMPILING CLIENT TEMPLATES ************"

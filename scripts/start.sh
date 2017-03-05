@@ -20,6 +20,8 @@ cd public
 # ./node_modules/bower/bin/bower install
 cd ..
 
+./node_modules/webpack/bin/webpack.js ./public/javascripts/index.js ./public/javascripts/bundle.js
+
 echo "************ COMPILING CLIENT TEMPLATES ************"
 ./node_modules/clientjade/bin/clientjade ./views/client/ > ./public/javascripts/bin/templates.js
 

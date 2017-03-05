@@ -141,3 +141,5 @@ JournalCreationView.prototype = {
         this.detailElements.dateTime.html(this.dateTime.toString().slice(0,21));
     }
 };
+
+export default JournalCreationView;

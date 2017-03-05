@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
-    "jquery": "2.1.4",
-    "eonasdan-bootstrap-datetimepicker": "*"
+    "eonasdan-bootstrap-datetimepicker": "*",
+    "jquery": "2.1.4"
   }
 }

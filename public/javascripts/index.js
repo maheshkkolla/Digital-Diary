@@ -1,5 +1,7 @@
+
+import JournalCreationView from './journalCreationView.js'
 $.when(
-	$.getScript('/javascripts/journalCreationView.js'),
+	//$.getScript('/javascripts/journalCreationView.js'),
 	$.getScript('/javascripts/journalsView.js'),
 	$.getScript('/javascripts/journalView.js'),
 	$.getScript('/javascripts/models/journal.js'),

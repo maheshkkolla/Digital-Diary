@@ -1,7 +1,7 @@
-
-import JournalCreationView from './journalCreationView.js'
+import React from 'react'
+import ReactDom from 'react-dom'
+import JournalCreation from './journalCreationView.js'
 $.when(
-	//$.getScript('/javascripts/journalCreationView.js'),
 	$.getScript('/javascripts/journalsView.js'),
 	$.getScript('/javascripts/journalView.js'),
 	$.getScript('/javascripts/models/journal.js'),
@@ -10,8 +10,14 @@ $.when(
 ).done(function() {
 	window.App = {};
 	var app = window.App;
-	app.creationView = new JournalCreationView();
-	var dateTimePicker = app.creationView.getDateTimePicker();
-	app.journalsView = new JournalsView();
-	app.journalsView.setDateTimePicker(dateTimePicker);
+
+	ReactDom.render(
+		<JournalCreation />,
+		document.getElementById("creationView")
+	);
+
+	//app.creationView = new JournalCreationView();
+	//var dateTimePicker = app.creationView.getDateTimePicker();
+	//app.journalsView = new JournalsView();
+	//app.journalsView.setDateTimePicker(dateTimePicker);
 });

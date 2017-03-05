@@ -6,21 +6,7 @@ block content
     script(src="/javascripts/bundle.js")
     include _navbar
     div(class='myContainer content')
-        div(class='editor' id="editor")
-            div(class="actions")
-                div(class="action")
-                    include _dateTimePicker
-                div(class="action autoCursor" id="locationSelector")
-                    include _locationSelector
-            input(type='text' class='titleBox title' placeholder="Title ..." id='title')
-            include _journalDetails
-            div(id='journal' class='journalContent tinymceCustomBody')
-            div(class='editorFooter')
-                div.pull-right
-                    button(class="btn btn-primary" id='clearAll') Clear All
-                    &emsp;
-                    button(class="btn btn-primary" id='saveJournal') Save Journal
-                div.clearfix
+        div(id="creationView")
         div(class="content container")
             h4 Today's Journals
             div(id="journals" class="journals")

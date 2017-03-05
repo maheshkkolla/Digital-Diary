@@ -1,47 +1,6 @@
 extends layout
 
 block content
- body(style='background-color:#d1e0fa !important;')
+  script(src="/javascripts/bundle.js")
   include _navbar
-  div(class='jumbotron') 
-   div(class='col-md-2')
-   div(class='col-md-2')
-    div(class='name') Digital Diary
-   div(class='col-md-8 sideContent') 
-    div(class='notes') Don’t miss life moments. Record you life moments. We will help you
-    a(class='btn loginBtn' href='/auth/dropbox') Login with Dropbox
-    - if(error)
-     div(class='text-danger') #{error}
-  div(class='container homeContent') 
-   div(class='col-md-4 rightBorder') 
-    h3(class='title') Features
-    div(class='content') 
-     ul(class='features')
-      li Unlimited Journals
-      li Style your content
-      li Multiple entries per day
-      li Date and Time
-      li Dropbox login 
-   div(class='col-md-4 rightBorder')   
-    h3(class='title') Security
-    div(class='content') It is fully private. No one can see your journals. Digital Diary does not store your journals. Your journals will be storing in your dropbox.
-   div(class='col-md-4')
-    h3(class='title') Pricing
-    div(class='content') It is absolutely free.
- 
- div(class='modal fade' role='dialog' id='query')
-  script(src='javascripts/home.js')
-  div(class='modal-dialog')
-   div(class='modal-content')
-    div(class='modal-header')
-     h3 Post your query. We will come back to you.
-    div(class='modal-body')
-     form(action='' method='' id='postQueryForm')
-      input(type='name' class='form-control' name='name' placeholder='Name' required)
-      br
-      input(type='email' class='form-control' name='email' placeholder='Email' required)
-      br
-      textarea(name='query'  rows=7 class='form-control' placeholder='Write your query here ...' required)
-      br
-      div(class='text-center')
-       button(type='submit' class='btn btn-primary') Post
+  div#home

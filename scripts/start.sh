@@ -17,7 +17,6 @@ cd public
  then
   HOME=$OPENSHIFT_DATA_DIR
  fi
-# ./node_modules/bower/bin/bower install
 cd ..
 
 ./node_modules/webpack/bin/webpack.js

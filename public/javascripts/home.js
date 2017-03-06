@@ -15,6 +15,7 @@
 //});
 
 import React from "react"
+import Navbar from './navbar'
 
 export default class Home extends React.Component {
 	constructor() {
@@ -27,6 +28,7 @@ export default class Home extends React.Component {
 		// include _navbar
 		return (
 			<div>
+				<Navbar />
 				<div className='jumbotron'>
 					<div className='col-md-2'> </div>
 					<div className='col-md-2'>
@@ -65,26 +67,57 @@ export default class Home extends React.Component {
 						<div className='content'> It is absolutely free. </div>
 					</div>
 				</div>
-				<div className='modal fade' role='dialog' id='query'>
-					//script(src='javascripts/home.js')
-					<div className='modal-dialog'>
-						<div className='modal-content'>
-							<div className='modal-header'>
-								<h3> Post your query. We will come back to you. </h3>
-							</div>
-							<div className='modal-body'>
-								<form action='' method='' id='postQueryForm'>
-									<input type='name' className='form-control' name='name' placeholder='Name' required />
-									<br/>
-									<input type='email' className='form-control' name='email' placeholder='Email' required />
-									<br/>
-									<textarea name='query'  rows='7' className='form-control' placeholder='Write your query here ...' required> </textarea>
-									<br/>
-									<div className='text-center'>
-										<button type='submit' className='btn btn-primary'> Post </button>
-									</div>
-								</form>
-							</div>
+				<ContactUs />
+			</div>
+		);
+	}
+}
+
+class ContactUs extends React.Component {
+	constructor() {
+		super();
+		this.modalElementId = "query";
+	}
+
+	postQuery(evt) {
+		evt.preventDefault();
+		//TODO: validate before ajax request
+		$.ajax({
+    		url: '/contact/query',
+    		type: 'POST',
+    		data: {
+				name: this.name.value,
+				email: this.email.value,
+				query: this.query.value
+			}
+		}).done(this.handleResponse.bind(this));
+	}
+
+	handleResponse(res) {
+		$('#' + this.modalElementId).modal('hide');
+		//TODO: (res == 'OK') ? handleSuccess : handleFailure
+	}
+
+	render() {
+		return (
+			<div className='modal fade' role='dialog' id={this.modalElementId} >
+				<div className='modal-dialog'>
+					<div className='modal-content'>
+						<div className='modal-header'>
+							<h3> Post your query. We will come back to you. </h3>
+						</div>
+						<div className='modal-body'>
+							<form action='' method='' id='postQueryForm'>
+								<input type='name' className='form-control' placeholder='Name' ref={(input) => this.name = input}/>
+								<br/>
+								<input type='email' className='form-control' placeholder='Email' ref={(input) => this.email = input}/>
+								<br/>
+								<textarea rows='7' className='form-control' placeholder='Write your query here ...' ref={(input) => this.query = input}> </textarea>
+								<br/>
+								<div className='text-center'>
+									<button onClick={this.postQuery.bind(this)} className='btn btn-primary'> Post </button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>

@@ -420,8 +420,14 @@ body {
     clear: both;
 }
 
+.error {
+    color: #FF0000;
+}
 
-
+.contactUsForm .error {
+    font-size: 13px;
+    margin: 3px 0 0 5px;
+}
 
 
 

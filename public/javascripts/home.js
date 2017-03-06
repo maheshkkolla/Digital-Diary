@@ -16,6 +16,7 @@
 
 import React from "react"
 import Navbar from './navbar'
+import Utils from './utils'
 
 export default class Home extends React.Component {
 	constructor() {
@@ -77,12 +78,48 @@ class ContactUs extends React.Component {
 	constructor() {
 		super();
 		this.modalElementId = "query";
+		this.errorMessages = {
+			name: "Please enter your name",
+			email: "Please enter valid email",
+			query: "Please write you query"
+		};
+		this.state = {
+			errors: {
+				name: false,
+				email: false,
+				query: false
+			}
+		};
 	}
 
-	postQuery(evt) {
+	getValidationErrors() {
+		var errors = {};
+		Object.keys(this.state.errors).forEach((field) => {
+			(Utils.isNullOrEmpty(this[field].value)) ? (errors[field] = true) : (errors[field] = false);
+		});
+		Utils.isInvalidEmail(this.email.value) && (errors.email = true);
+		return errors;
+	}
+
+	validateAndPostQuery(evt) {
 		evt.preventDefault();
-		//TODO: validate before ajax request
-		$.ajax({
+		this.setState({
+			errors: this.getValidationErrors()
+		}, this.postQuery.bind(this));
+	}
+
+	hasErrors() {
+		return Object.keys(this.state.errors).reduce((hasErrors, field) => {
+			return hasErrors || this.state.errors[field];
+		}, false);
+	}
+
+	hasNoErrors() {
+		return !(this.hasErrors())
+	}
+
+	postQuery() {
+		this.hasNoErrors() && $.ajax({
     		url: '/contact/query',
     		type: 'POST',
     		data: {
@@ -98,6 +135,15 @@ class ContactUs extends React.Component {
 		//TODO: (res == 'OK') ? handleSuccess : handleFailure
 	}
 
+	hasErrorOn(field) {
+		return(this.state.errors[field]);
+	}
+
+	getErrorMessageFor(field) {
+		return(this.errorMessages[field]);
+	}
+
+	//TODO: placeholder for textarea is not working. So, use labels instead
 	render() {
 		return (
 			<div className='modal fade' role='dialog' id={this.modalElementId} >
@@ -106,16 +152,25 @@ class ContactUs extends React.Component {
 						<div className='modal-header'>
 							<h3> Post your query. We will come back to you. </h3>
 						</div>
-						<div className='modal-body'>
+						<div className='modal-body contactUsForm'>
 							<form action='' method='' id='postQueryForm'>
 								<input type='name' className='form-control' placeholder='Name' ref={(input) => this.name = input}/>
+								<p className='error'>
+									{		(this.hasErrorOn('name')) && this.getErrorMessageFor('name') }
+								</p>
 								<br/>
 								<input type='email' className='form-control' placeholder='Email' ref={(input) => this.email = input}/>
+								<p className='error'>
+									{		(this.hasErrorOn('email')) && this.getErrorMessageFor('email') }
+								</p>
 								<br/>
 								<textarea rows='7' className='form-control' placeholder='Write your query here ...' ref={(input) => this.query = input}> </textarea>
+								<p className='error'>
+									{		(this.hasErrorOn('query')) && this.getErrorMessageFor('query') }
+								</p>
 								<br/>
 								<div className='text-center'>
-									<button onClick={this.postQuery.bind(this)} className='btn btn-primary'> Post </button>
+									<button onClick={this.validateAndPostQuery.bind(this)} className='btn btn-primary'> Post </button>
 								</div>
 							</form>
 						</div>

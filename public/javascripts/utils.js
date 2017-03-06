@@ -1,9 +1,9 @@
 //Common Utils
-var Utils = function () {
+var Util = function () {
 
 };
 
-Utils.prototype = {
+Util.prototype = {
     isNotNullOrUndefined: function(variable) {
         return (!this.isNullOrUndefined(variable));
     },
@@ -48,7 +48,7 @@ Utils.prototype = {
         return new Date().toString();
     }
 };
-var u = new Utils();
+var u = new Util();
 
 //String Utils
 String.prototype.concatWithSpace = function(other) {
@@ -59,6 +59,29 @@ String.prototype.is = function(other) {
     return (this == other);
 };
 
+export default class Utils {
+
+    static isNullOrEmpty(value) {
+        return(Utils.isNull(value) || Utils.isUndefined(value) || Utils.isEmptyString(value) );
+    }
+
+    static isNull(value) {
+        return(value === null);
+    }
+
+    static isUndefined(value) {
+        return(value === undefined)
+    }
+
+    static isEmptyString(value) {
+        return !(/\S/.test(value));
+    }
+
+    static isInvalidEmail(email) {
+        let emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return !(emailRegEx.test(email));
+    }
+}
 
 
 

@@ -147,24 +147,27 @@ class ContactUs extends React.Component {
 	render() {
 		return (
 			<div className='modal fade' role='dialog' id={this.modalElementId} >
-				<div className='modal-dialog'>
+				<div className='modal-dialog contactUsForm'>
 					<div className='modal-content'>
 						<div className='modal-header'>
 							<h3> Post your query. We will come back to you. </h3>
 						</div>
-						<div className='modal-body contactUsForm'>
+						<div className='modal-body'>
 							<form action='' method='' id='postQueryForm'>
-								<input type='name' className='form-control' placeholder='Name' ref={(input) => this.name = input}/>
+								<label> Name: </label>
+								<input type='name' className= { `formControl ${(this.hasErrorOn('name')) ? 'errorFormElement' : ''}` } ref={(input) => this.name = input}/>
 								<p className='error'>
 									{		(this.hasErrorOn('name')) && this.getErrorMessageFor('name') }
 								</p>
 								<br/>
-								<input type='email' className='form-control' placeholder='Email' ref={(input) => this.email = input}/>
+								<label> Email: </label>
+								<input type='email' className= { `formControl ${(this.hasErrorOn('email')) ? 'errorFormElement' : ''}` } ref={(input) => this.email = input}/>
 								<p className='error'>
 									{		(this.hasErrorOn('email')) && this.getErrorMessageFor('email') }
 								</p>
 								<br/>
-								<textarea rows='7' className='form-control' placeholder='Write your query here ...' ref={(input) => this.query = input}> </textarea>
+								<label> Query: </label>
+								<textarea rows='7' className= { `formControl ${(this.hasErrorOn('query')) ? 'errorFormElement' : ''}` } ref={(input) => this.query = input}> </textarea>
 								<p className='error'>
 									{		(this.hasErrorOn('query')) && this.getErrorMessageFor('query') }
 								</p>

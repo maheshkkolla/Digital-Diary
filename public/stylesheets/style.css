@@ -10,10 +10,6 @@ body {
   min-height: 100%;
 }
 
-.modal-dialog {
-    width: 80% !important;
-}
-
 .bodyColor {
   color: #103b89 !important;
 }
@@ -424,12 +420,30 @@ body {
     color: #FF0000;
 }
 
+.errorFormElement {
+    border: 1px solid;
+    border-color: #FF0000 !important;
+}
+
+.contactUsForm {
+    width: 75%;
+}
+
 .contactUsForm .error {
     font-size: 13px;
     margin: 3px 0 0 5px;
 }
 
+.contactUsForm .label {
+    margin: 0;
+}
 
+.contactUsForm .formControl {
+    width: 100%;
+    font-size: 18px;
+    color: #000000;
+    border: 1px solid #A9A9A9;
+}
 
 
 

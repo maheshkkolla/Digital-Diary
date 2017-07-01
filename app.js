@@ -27,7 +27,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
 app.use(session({
     secret: 'Digital Diary',
     resave: true,
@@ -83,7 +83,6 @@ app.get('/auth/dropbox-oauth2/callback', isAuthenticated, function(req, res, nex
   res.redirect('/');
 });
 
-
 app.get('/login', function(req, res, next) {
   res.render('login' , {error: req.query.error});
 });
@@ -109,7 +108,7 @@ app.use(function (req, res, next) {
   else res.redirect('/login');
 });
 
-app.use('/', routes);
+app.use('/api', routes);
 app.use('/users', users);
 app.use('/journals', journals);
 

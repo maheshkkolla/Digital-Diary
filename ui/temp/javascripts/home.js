@@ -48,9 +48,9 @@ export default class Home extends React.Component {
 							<ul className='features'>
 								<li> Unlimited Journals </li>
 								<li> Style your content </li>
-								<li>Multiple entries per day </li>
-								<li>Date and Time </li>
-								<li>Dropbox login </li>
+								<li> Multiple entries per day </li>
+								<li> Date and Time </li>
+								<li> Dropbox login </li>
 							</ul>
 						</div>
 					</div>

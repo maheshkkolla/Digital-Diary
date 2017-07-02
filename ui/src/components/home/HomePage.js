@@ -1,5 +1,5 @@
 import React from 'react';
-import {Jumbotron, Grid, Row, Col} from 'react-bootstrap';
+import {Jumbotron, Col} from 'react-bootstrap';
 
 export default class HomePage extends React.Component {
 

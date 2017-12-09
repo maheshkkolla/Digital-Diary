@@ -1,16 +1,32 @@
 import express from 'express';
-import users from "./users";
+import authRoutes from "./authController";
+import authService from "../services/authSerive";
+
 
 let router = express.Router();
 
-router.use('/users', users);
+router.use('/auth', authRoutes);
 
 
 /* health end point */
-router.get("/ping", function(req, res, next) {
+router.get("/ping", (req, res, next) => {
   res.send("pong");
   res.end();
 });
+
+router.use((req, res, next) => {
+  const token = req.headers["x-access-token"];
+  authService.authenticate(token)
+  .then(user => {
+    res.locals.user=user;
+    next();
+  }).catch(err => {
+    res.status(err.status || 500);
+    res.json(err);
+  });
+});
+
+
 
 // catch 404 and forward to error handler
 router.use(function(req, res, next) {
@@ -26,7 +42,7 @@ router.use(function(req, res, next) {
 if (router.get('env') === 'development') {
   router.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.json({
       message: err.message,
       error: err
     });
@@ -37,9 +53,9 @@ if (router.get('env') === 'development') {
 // no stacktraces leaked to user
 router.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  res.json({
     message: err.message,
-    error: {}
+    error: err
   });
 });
 

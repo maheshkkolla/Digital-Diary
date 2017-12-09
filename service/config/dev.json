@@ -1,0 +1,7 @@
+{
+  "secretKey": "secretkey",
+  "db": {
+    "client": "pg",
+    "connection" : "postgres://localhost/digitaldiary"
+  }
+}

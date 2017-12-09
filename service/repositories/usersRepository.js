@@ -17,4 +17,10 @@ usersRepository.findById = (userId) => {
     .then(users => Promise.resolve(new User(users[0])));
 };
 
+usersRepository.findByEmail = (email) => {
+  return db('users')
+    .where('email', email)
+    .then(users => Promise.resolve(new User(users[0])));
+};
+
 export default usersRepository;

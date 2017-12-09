@@ -22,10 +22,26 @@ authSerivce.authenticate = (token) => {
 authSerivce.register = (user) => {
   user = user.setPassword(bcrypt.hashSync(user.password, bcrypt.genSaltSync(8)));
   return usersService.create(user).then((createdUser)=>{
-    const token = jwt.sign(createdUser.toIdentityJson(), config.secretKey, {
-      expiresIn: 86400 // expires in 24 hours
-    });
+    const token = authSerivce.generateToken(createdUser);
     return Promise.resolve(createdUser.setToken(token).toJson());
+  });
+};
+
+authSerivce.login = (user) => {
+  return new Promise((resolve, reject) => {
+    usersRepository.findByEmail(user.email)
+      .then(dbUser => {
+        (dbUser && bcrypt.compareSync(user.password, dbUser.password)) ? resolve(dbUser) : reject({status: 401, message: "Invalid Credentials"});
+      }).then(dbUser => {
+        const token = authSerivce.generateToken(dbUser);
+        return Promise.resolve(dbUser.setToken(token).toJson());
+      });
+  });
+};
+
+authSerivce.generateToken = (user) => {
+  jwt.sign(user.toIdentityJson(), config.secretKey, {
+    expiresIn: 86400 // expires in 24 hours
   });
 };
 

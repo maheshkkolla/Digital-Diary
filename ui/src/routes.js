@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
-import {browserHistory} from 'react-router';
+import { Route, IndexRoute, browserHistory } from 'react-router';
 import App from './components/App';
 import HomePage from './components/home/HomePage';
 import AddJournalPage from './components/add-journal/AddJournalPage';
@@ -11,13 +10,19 @@ import AuthService from './utils/AuthService';
 
 function redirectIfNotAuthorized() {
  if(!AuthService.isAuthorised()) {
-   browserHistory.push('/');
+   browserHistory.push('/app');
+ }
+}
+
+function redirectIfAuthorized() {
+ if(AuthService.isAuthorised()) {
+   browserHistory.push('/add-journal');
  }
 }
 
 export default (
-  <Route path="/" component={App}>
-    <IndexRoute component={HomePage}/>
+  <Route path="/app" component={App}>
+    <IndexRoute component={HomePage} onEnter={redirectIfAuthorized()}/>
     <Route path="add-journal" component={AddJournalPage} onEnter={redirectIfNotAuthorized}/>
     {/*<Route path="fuel-savings" component={FuelSavingsPage}/>*/}
     {/*<Route path="about" component={AboutPage}/>*/}

@@ -30,6 +30,7 @@
   "author": "Mahesh",
   "license": "MIT",
   "dependencies": {
+    "jquery": "^3.2.1",
     "object-assign": "4.1.0",
     "react": "15.5.4",
     "react-bootstrap": "^0.31.0",

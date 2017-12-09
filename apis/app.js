@@ -27,7 +27,15 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use('/app-static', express.static(path.join(__dirname, 'dist')));
+app.use('/app', function(req, res) {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
+
+app.get('/', function(req, res) {
+  res.redirect('/app');
+});
+
 app.use(session({
     secret: 'Digital Diary',
     resave: true,
@@ -66,21 +74,21 @@ passport.deserializeUser(function (id, done) {
     usersModule.getById(id, done);
 });
 
-var isAuthenticated = function(req, res, sucess) {
+var authenticateUser = function(req, res, success) {
   passport.authenticate('dropbox-oauth2', function(authErr, user) {
-      authErr && res.redirect('/login?error='+authErr);
+      authErr && res.redirect('/app');
       user && req.login(user, function(err) {
-        if(err) res.redirect('/login?error='+err);
-        else sucess();
+        if(err) res.redirect('/app');
+        else success();
       })
-  })(req, res, sucess);
+  })(req, res, success);
 };
 
 app.get('/auth/dropbox', passport.authenticate('dropbox-oauth2'));
 
-app.get('/auth/dropbox-oauth2/callback', isAuthenticated, function(req, res, next) {
+app.get('/auth/dropbox-oauth2/callback', authenticateUser, function(req, res, next) {
   req.session.user = req.user;
-  res.redirect('/');
+  res.redirect('/app');
 });
 
 app.get('/login', function(req, res, next) {
@@ -104,8 +112,11 @@ app.use(function (req, res, next) {
   if (req.isAuthenticated()) {
     res.locals.user = req.session.user;
     next();
-  } 
-  else res.redirect('/login');
+  }
+  else {
+    res.status(401);
+    res.send('Not Authorized !');
+  }
 });
 
 app.use('/api', routes);

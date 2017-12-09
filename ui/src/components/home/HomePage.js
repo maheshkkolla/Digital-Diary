@@ -1,5 +1,6 @@
 import React from 'react';
 import {Jumbotron, Col} from 'react-bootstrap';
+import GoogleSignIn from "react-google-signin";
 
 export default class HomePage extends React.Component {
 
@@ -19,11 +20,24 @@ export default class HomePage extends React.Component {
 		);
 	}
 
+	signOut() {
+		this.googleSignIn.signOut();
+	}
+
+	setGoogleSignIn(g) {
+		this.googleSignIn = g;
+	}
+
 	getBottomSection() {
 		return(
 			<div className='container homeContent'>
 				<div className='col-md-4 rightBorder'>
 					<h3 className='title'> Features </h3>
+					<GoogleSignIn clientId="879907207218-9o856ce97p5u9kn0nn8836vr9vo753r9"
+												ref={this.setGoogleSignIn.bind(this)}
+												onSuccess={(d) => { console.log(d)}}
+					/>
+					<button onClick={this.signOut.bind(this)}> Sign Out </button>
 					<div className='content'>
 						<ul className='features'>
 							<li> Unlimited Journals </li>

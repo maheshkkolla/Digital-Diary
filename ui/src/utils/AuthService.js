@@ -15,4 +15,4 @@ export default {
     const userDetails = localStorage.getItem('user');
     return (userDetails !== undefined && userDetails !== null);
   }
-}
+};

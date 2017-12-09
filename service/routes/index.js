@@ -1,6 +1,6 @@
 import express from 'express';
 import authRoutes from "./authController";
-import authService from "../services/authSerive";
+import authService from "../services/authService";
 
 
 let router = express.Router();

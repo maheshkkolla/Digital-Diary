@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 import config from "../config/index";
+import usersService from "../services/usersService";
 import usersRepository from "../repositories/usersRepository";
+import bcrypt from "bcryptjs";
 
 let authSerivce = {};
 
@@ -19,13 +21,12 @@ authSerivce.authenticate = (token) => {
 
 authSerivce.register = (user) => {
   user = user.setPassword(bcrypt.hashSync(user.password, bcrypt.genSaltSync(8)));
-  return usersRepository.create(user).then((createdUser)=>{
+  return usersService.create(user).then((createdUser)=>{
     const token = jwt.sign(createdUser.toIdentityJson(), config.secretKey, {
       expiresIn: 86400 // expires in 24 hours
     });
     return Promise.resolve(createdUser.setToken(token).toJson());
   });
-
 };
 
 export default authSerivce;

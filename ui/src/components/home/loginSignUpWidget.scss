@@ -1,0 +1,54 @@
+@import "../../styles/config";
+
+.login-signup-widget {
+
+  background-color: rgba(0, 0, 0, 0.6);
+
+  .nav-tabs {
+    border: 0;
+  }
+
+  .nav-tabs > li.active > a, .nav-tabs > li > a,
+  .nav-tabs > li.active > a:focus, .nav-tabs > li > a:focus,
+  .nav-tabs > li.active > a:hover, .nav-tabs > li > a:hover {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    outline: none;
+  }
+
+  .nav-tabs > li > a, .nav-tabs > li > a:focus, .nav-tabs > li > a:hover {
+    border-bottom: 1px solid $secondary-color-7;
+    margin: 0;
+  }
+
+  .nav-tabs > li {
+    &:nth-child(odd) {
+      > a, > a:focus, > a:hover {
+        border-right: 1px solid $secondary-color-7;
+      }
+    }
+  }
+
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: $secondary-color-8;
+    font-weight: 500;
+  }
+
+  .nav-tabs > li > a {
+    color: $secondary-color-6;
+    font-size: 22px;
+    font-weight: 400;
+  }
+
+  .nav-tabs > li {
+    width: 50%;
+  }
+
+  .login-widget {
+    .content {
+      padding: 50px 20px 20px;
+    }
+  }
+
+}

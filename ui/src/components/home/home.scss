@@ -1,0 +1,62 @@
+@import "../../styles/config";
+
+.home-page {
+  .main-content-container {
+    margin-top: -20px;
+
+    .section-1 {
+      position: relative;
+      width: 100%;
+
+      .image-wrapper {
+        background: $secondary-color-8;
+
+        img {
+          opacity: 0.4;
+        }
+
+      }
+
+      .section-content {
+        position: absolute;
+        width: 100%;
+        display: inline-block;
+        top: 0;
+        left: 0;
+
+        .column {
+          text-align: center;
+          margin-top: 100px;
+          padding-left: 50px;
+          padding-right: 50px;
+        }
+
+        .introduction {
+          color: $primary-color-3;
+
+          .title {
+            font-size: 50px;
+            font-weight: 700;
+            margin-bottom: 50px;
+            margin-top: 50px;
+          }
+
+          .text {
+            font-size: 30px;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+    .features-section {
+      height: 500px;
+    }
+
+    .contact-us-section {
+      height: 500px;
+    }
+
+  }
+
+}

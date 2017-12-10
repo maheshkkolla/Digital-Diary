@@ -3,8 +3,8 @@ import * as ActionTypes from '../constants/actionTypes';
 import MockDate from 'mockdate';
 import configureStore from './configureStore';
 
-import {calculateSavings} from '../utils/fuelSavings';
-import {getFormattedDateTime} from '../utils/dates';
+import {calculateSavings} from '../utils/temp/fuelSavings';
+import {getFormattedDateTime} from '../utils/temp/dates';
 
 describe('Store', () => {
   let dateModified;

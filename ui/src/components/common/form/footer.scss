@@ -1,0 +1,24 @@
+@import "../../../styles/config";
+
+.footer {
+  box-shadow: 0 -1px 5px $secondary-color-7;
+  text-align: right;
+
+  .save-btn, .cancel-btn {
+
+    &:focus {
+      outline: none;
+    }
+
+    font-size: 22px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: $secondary-color-7;
+    padding: 10px 15px;
+  }
+
+  .cancel-btn {
+    font-weight: 300;
+  }
+}

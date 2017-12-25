@@ -37,7 +37,7 @@ export default class Footer extends React.Component {
 
   getCancelBtn() {
     return (this.props.noCancel)
-      ? <sapn/>
+      ? <span/>
       : (<button className="cancel-btn" style={this.getCancelBtnStyle()} onClick={this.onCancel}>
           {this.getCancelContent()}
         </button>);
@@ -53,7 +53,7 @@ export default class Footer extends React.Component {
 
   getSaveBtn() {
     return (
-      <button className="save-btn" style={this.getSaveBtnStyle()} onClick={this.onSave}>
+      <button type="submit" className="save-btn" style={this.getSaveBtnStyle()} onClick={this.onSave}>
         {this.getSaveContent()}
       </button>
     );

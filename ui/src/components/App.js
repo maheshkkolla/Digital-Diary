@@ -2,8 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, NavLink, Route } from 'react-router-dom';
-import LandingPage from "../containers/LandingPage";
+import LandingPage from "../components/home/LandingPage";
 import NotFoundPage from './NotFoundPage';
+import { ToastContainer} from 'react-toastify';
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -18,6 +19,7 @@ class App extends React.Component {
           <Route exact path="/" component={LandingPage} />
           <Route component={NotFoundPage} />
         </Switch>
+        <ToastContainer/>
       </div>
     );
   }

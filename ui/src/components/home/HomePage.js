@@ -36,7 +36,7 @@ export default class HomePage extends React.Component {
             <div className="section-content">
               <Row>
                 <Col md={5} className="column">
-                  <LoginSignUpWidget />
+                  <LoginSignUpWidget actions={this.props.actions}/>
                 </Col>
                 <Col md={7} className="column">
                   <div className="introduction">
@@ -56,3 +56,4 @@ export default class HomePage extends React.Component {
     );
   }
 }
+

@@ -32,7 +32,8 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
-    "formsy-react": "^1.1.1",
+    "formsy-react": "^1.1.2",
+    "jquery": "^3.2.1",
     "object-assign": "4.1.0",
     "react": "16.0.0",
     "react-bootstrap": "^0.31.5",
@@ -42,6 +43,7 @@
     "react-router-dom": "4.2.2",
     "react-router-redux": "5.0.0-alpha.6",
     "react-scroll-to-component": "^1.0.2",
+    "react-toastify": "^3.2.1",
     "redux": "3.6.0",
     "redux-thunk": "2.1.0"
   },

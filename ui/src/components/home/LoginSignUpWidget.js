@@ -13,7 +13,7 @@ export default class LoginSignUpWidget extends React.Component {
           <Login />
         </Tab>
         <Tab eventKey={2} title="Sign Up">
-          <Signup />
+          <Signup actions={this.props.actions.signup}/>
         </Tab>
       </Tabs>
     );

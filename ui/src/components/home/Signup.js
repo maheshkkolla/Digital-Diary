@@ -3,17 +3,40 @@ import Formsy from "formsy-react";
 import FormsyTextbox from "./FormsyTextbox";
 import Footer from "../common/form/Footer";
 import FontAwesome from "react-fontawesome";
-import {OverlayTrigger, Tooltip} from "react-bootstrap";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import User from "../../models/User";
+import { toast } from 'react-toastify';
 
 export default class Signup extends React.Component {
 
   constructor() {
     super();
     this.onSignUp = this.onSignUp.bind(this);
+    this.onInvalidSubmit = this.onInvalidSubmit.bind(this);
+    this.validations = {
+        email: "isExisty,isEmail",
+        confirmPassword: "isExisty,equalsField:password"
+    };
+
+    this.validationsMessages = {
+      name: { isDefaultRequiredValue: "Please enter your name" },
+      email: { isDefaultRequiredValue: "Please enter your email", isEmail: "Please enter valid email" },
+      password: { isDefaultRequiredValue: "Please enter your password"},
+      confirmPassword: {isDefaultRequiredValue: "Please confirm your password", 'equalsField:password': "Please enter same password in both the places"}
+    }
   }
 
-  onSignUp() {
+  onSignUp(model) {
+    const user = new User(model);
+    this.props.actions.onSignUp(user);
+  }
 
+  onInvalidSubmit() {
+      let errors = [];
+      this.form.inputs.forEach(input => {
+          (!input.isValid()) && errors.push(input.getErrorMessage());
+      });
+      toast.error(errors[0]);
   }
 
   getSignUpBtnContent() {
@@ -26,23 +49,22 @@ export default class Signup extends React.Component {
 
   getSignUpBtn() {
     return {
-      content: this.getSignUpBtnContent(),
-      onClick: this.onSignUp
+      content: this.getSignUpBtnContent()
     };
   }
 
   render() {
     return(
       <div className="login-widget">
-        <div className="content">
-          <Formsy ref={(f) => this.form = f}>
-            <FormsyTextbox type="text" label="Name" name="name" placeholder="Enter your name"/>
-            <FormsyTextbox type="text" label="Email" name="name" placeholder="Enter your email"/>
-            <FormsyTextbox type="password" label="Password" name="password" placeholder="Enter your password"/>
-            <FormsyTextbox type="password" label="Confirm Password" name="confirm_password" placeholder="Re-Enter your password"/>
-          </Formsy>
-        </div>
-        <Footer noCancel={true} saveBtn={this.getSignUpBtn()} />
+        <Formsy ref={(f) => this.form = f} onValidSubmit={this.onSignUp} onInvalidSubmit={this.onInvalidSubmit}>
+          <div className="content">
+            <FormsyTextbox type="text" label="Name" name="name" placeholder="Enter your name" validationErrors={this.validationsMessages.name} required/>
+            <FormsyTextbox type="text" label="Email" name="email" placeholder="Enter your email" validations={this.validations.email} validationErrors={this.validationsMessages.email} required/>
+            <FormsyTextbox type="password" label="Password" name="password" placeholder="Enter your password" validationErrors={this.validationsMessages.password} required/>
+            <FormsyTextbox type="password" label="Confirm Password" name="confirm_password" placeholder="Re-Enter your password" validations={this.validations.confirmPassword} validationErrors={this.validationsMessages.confirmPassword} required/>
+          </div>
+          <Footer noCancel={true} saveBtn={this.getSignUpBtn()} />
+        </Formsy>
       </div>
     );
   }

@@ -23,7 +23,12 @@ export default class HomeNavbar extends React.Component {
           </Navbar.Collapse>
         </Navbar>
         <Navbar className="navigation-bar">
-          <img src="../../static/logo.png" alt="Lexicon"/>
+          <Navbar.Header className="header">
+            <Navbar.Brand className="brand">
+              <a href="#"><img src="../../static/logo.png" alt="Lexicon"/></a>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
         </Navbar>
       </div>
     );

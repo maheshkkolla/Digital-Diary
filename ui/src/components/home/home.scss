@@ -5,30 +5,23 @@
     margin-top: -20px;
 
     .section-1 {
-      position: relative;
-      width: 100%;
-
-      .image-wrapper {
-        background: $secondary-color-8;
-
-        img {
-          opacity: 0.4;
-        }
-
-      }
-
       .section-content {
-        position: absolute;
-        width: 100%;
-        display: inline-block;
-        top: 0;
-        left: 0;
+        height: calc(100vh - 100px);
+
+        .row {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          padding-left: 100px;
+          padding-right: 100px;
+        }
 
         .column {
           text-align: center;
-          margin-top: 100px;
-          padding-left: 50px;
-          padding-right: 50px;
+
+          &:last-child {
+            padding-left: 50px;
+          }
         }
 
         .introduction {
@@ -38,7 +31,6 @@
             font-size: 50px;
             font-weight: 700;
             margin-bottom: 50px;
-            margin-top: 50px;
           }
 
           .text {
